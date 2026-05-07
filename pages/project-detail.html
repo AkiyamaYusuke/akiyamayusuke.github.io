@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情 | Akiyama Yusuke</title>
+    <script>
+        (function () {
+            if (location.protocol !== 'file:') {
+                return;
+            }
+
+            const serviceBase = 'http://127.0.0.1:8000';
+            const targetUrl = `${serviceBase}/pages/project-detail.html${location.search || ''}${location.hash || ''}`;
+            const probe = new Image();
+            probe.onload = function () {
+                location.replace(targetUrl);
+            };
+            probe.onerror = function () {
+                document.documentElement.setAttribute('data-runtime-mode', 'file-fallback');
+            };
+            probe.src = `${serviceBase}/favicon.png?probe=20260507c`;
+        })();
+    </script>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/project-detail.css">
+</head>
+<body>
+    <main class="detail-shell">
+        <a class="detail-back" id="detailBackLink" href="../index.html#portfolio">
+            <i class="fa fa-angle-left"></i>
+            <span>返回作品墙</span>
+        </a>
+
+        <section class="detail-stage">
+            <div class="detail-stage__head">
+                <span class="detail-stage__badge" id="detailBadge">Project</span>
+                <h1 id="detailTitle">项目详情</h1>
+                <p id="detailSummary"></p>
+                <div class="detail-meta" id="detailMeta"></div>
+            </div>
+            <div class="detail-media" id="detailMedia"></div>
+        </section>
+
+        <section class="detail-section">
+            <h2>项目亮点</h2>
+            <ul class="detail-highlights" id="detailHighlights"></ul>
+        </section>
+    </main>
+
+    <script src="../js/config/runtime-path-resolver.js?v=20260507b"></script>
+    <script src="../js/config/generated-site-data.js?v=20260507b"></script>
+    <script src="../js/data/site-data-loader.js?v=20260507b"></script>
+    <script src="../js/project-detail.js?v=20260507b"></script>
+</body>
+</html>

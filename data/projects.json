@@ -1,0 +1,244 @@
+{
+  "items": [
+    {
+      "id": "android-mobile-ui",
+      "title": "\u79fb\u52a8\u7aef\u754c\u9762",
+      "kind": "Image",
+      "category": "android",
+      "contentType": "image",
+      "detailPath": "pages/project-detail.html?id=android-mobile-ui",
+      "summary": "\u7528\u4e8e\u5c55\u793a Android \u9875\u9762\u98ce\u683c\u3001\u4ea4\u4e92\u5c42\u7ea7\u548c\u79fb\u52a8\u7aef\u89c6\u89c9\u6392\u5e03\u3002",
+      "highlights": [
+        "\u9002\u5408\u5355\u56fe\u5c55\u793a",
+        "\u9002\u5408\u754c\u9762\u7a3f",
+        "\u9002\u5408\u4ea7\u54c1\u5c01\u9762"
+      ],
+      "cover": {
+        "label": "Android UI",
+        "icon": "fa-mobile",
+        "accent": "#7dbbff",
+        "accentSoft": "#ffd7ea"
+      }
+    },
+    {
+      "id": "frontend-layout-flow",
+      "title": "\u5e03\u5c40\u6d41\u8f6c",
+      "kind": "Gallery",
+      "category": "frontend",
+      "contentType": "gallery",
+      "detailPath": "pages/project-detail.html?id=frontend-layout-flow",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u591a\u5f20\u5e03\u5c40\u65b9\u6848\u3001\u4ea4\u4e92\u6d41\u7a0b\u56fe\u548c\u9875\u9762\u6f14\u8fdb\u7a3f\u3002",
+      "highlights": [
+        "\u9002\u5408\u591a\u56fe\u5c55\u793a",
+        "\u9002\u5408\u6d41\u7a0b\u7a3f",
+        "\u9002\u5408\u9875\u9762\u6f14\u5316"
+      ],
+      "cover": {
+        "label": "Layout",
+        "icon": "fa-columns",
+        "accent": "#8fd5ff",
+        "accentSoft": "#ffe2ef"
+      }
+    },
+    {
+      "id": "embedded-device-motion",
+      "title": "\u8bbe\u5907\u52a8\u6001",
+      "kind": "Video",
+      "category": "embedded",
+      "contentType": "video",
+      "detailPath": "pages/project-detail.html?id=embedded-device-motion",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u8bbe\u5907\u8054\u52a8\u3001\u52a8\u4f5c\u6f14\u793a\u3001\u5f55\u5c4f\u6d41\u7a0b\u548c\u786c\u4ef6\u52a8\u6001\u5185\u5bb9\u3002",
+      "highlights": [
+        "\u9002\u5408\u6f14\u793a\u89c6\u9891",
+        "\u9002\u5408\u5f55\u5c4f",
+        "\u9002\u5408\u8bbe\u5907\u52a8\u4f5c"
+      ],
+      "cover": {
+        "label": "Device",
+        "icon": "fa-cogs",
+        "accent": "#76b8ff",
+        "accentSoft": "#ffd1e2"
+      }
+    },
+    {
+      "id": "frontend-control-panel",
+      "title": "\u63a7\u5236\u9762\u677f",
+      "kind": "Gallery",
+      "category": "frontend",
+      "contentType": "gallery",
+      "detailPath": "pages/project-detail.html?id=frontend-control-panel",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u540e\u53f0\u3001\u9762\u677f\u3001\u5206\u533a\u6a21\u5757\u548c\u64cd\u4f5c\u6d41\u3002",
+      "highlights": [
+        "\u9002\u5408\u540e\u53f0",
+        "\u9002\u5408\u7ec4\u4ef6\u9875",
+        "\u9002\u5408\u63a7\u5236\u53f0"
+      ],
+      "cover": {
+        "label": "Control",
+        "icon": "fa-sliders",
+        "accent": "#8dcfff",
+        "accentSoft": "#ffe0f0"
+      }
+    },
+    {
+      "id": "android-camera-capture",
+      "title": "\u62cd\u6444\u91c7\u96c6",
+      "kind": "Image",
+      "category": "android",
+      "contentType": "image",
+      "detailPath": "pages/project-detail.html?id=android-camera-capture",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u62cd\u6444\u3001\u626b\u7801\u3001\u8bc6\u522b\u3001\u91c7\u96c6\u7c7b\u754c\u9762\u3002",
+      "highlights": [
+        "\u9002\u5408\u91c7\u96c6\u9875",
+        "\u9002\u5408\u626b\u7801\u9875",
+        "\u9002\u5408\u62cd\u6444\u9875"
+      ],
+      "cover": {
+        "label": "Capture",
+        "icon": "fa-camera-retro",
+        "accent": "#78c0ff",
+        "accentSoft": "#ffd8e9"
+      }
+    },
+    {
+      "id": "embedded-module-scene",
+      "title": "\u6a21\u5757\u573a\u666f",
+      "kind": "Video",
+      "category": "embedded",
+      "contentType": "video",
+      "detailPath": "pages/project-detail.html?id=embedded-module-scene",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u6a21\u5757\u7ec4\u5408\u3001\u8bbe\u5907\u573a\u666f\u548c\u529f\u80fd\u8054\u52a8\u3002",
+      "highlights": [
+        "\u9002\u5408\u6a21\u5757\u8054\u52a8",
+        "\u9002\u5408\u529f\u80fd\u6f14\u793a",
+        "\u9002\u5408\u8bbe\u5907\u573a\u666f"
+      ],
+      "cover": {
+        "label": "Module",
+        "icon": "fa-cube",
+        "accent": "#89c6ff",
+        "accentSoft": "#ffdae8"
+      }
+    },
+    {
+      "id": "android-navigation-explore",
+      "title": "\u5bfc\u822a\u63a2\u7d22",
+      "kind": "Image",
+      "category": "android",
+      "contentType": "image",
+      "detailPath": "pages/project-detail.html?id=android-navigation-explore",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u5bfc\u822a\u3001\u8def\u5f84\u3001\u5b9a\u4f4d\u548c\u63a2\u7d22\u578b\u9875\u9762\u3002",
+      "highlights": [
+        "\u9002\u5408\u5bfc\u822a\u9875",
+        "\u9002\u5408\u8def\u5f84\u9875",
+        "\u9002\u5408\u63a2\u7d22\u9875"
+      ],
+      "cover": {
+        "label": "Explore",
+        "icon": "fa-compass",
+        "accent": "#8ed1ff",
+        "accentSoft": "#ffddeb"
+      }
+    },
+    {
+      "id": "embedded-motion-sequence",
+      "title": "\u52a8\u4f5c\u5e8f\u5217",
+      "kind": "Video",
+      "category": "embedded",
+      "contentType": "video",
+      "detailPath": "pages/project-detail.html?id=embedded-motion-sequence",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u8bbe\u5907\u52a8\u4f5c\u3001\u65f6\u5e8f\u8fc7\u7a0b\u548c\u5f55\u5c4f\u6d41\u7a0b\u3002",
+      "highlights": [
+        "\u9002\u5408\u65f6\u5e8f\u6f14\u793a",
+        "\u9002\u5408\u52a8\u4f5c\u5f55\u5c4f",
+        "\u9002\u5408\u6d41\u7a0b\u89c6\u9891"
+      ],
+      "cover": {
+        "label": "Motion",
+        "icon": "fa-play-circle",
+        "accent": "#77bbff",
+        "accentSoft": "#ffd2e5"
+      }
+    },
+    {
+      "id": "android-signal-system",
+      "title": "\u4fe1\u53f7\u7cfb\u7edf",
+      "kind": "Image",
+      "category": "android",
+      "contentType": "image",
+      "detailPath": "pages/project-detail.html?id=android-signal-system",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u8fde\u63a5\u3001\u901a\u4fe1\u3001\u72b6\u6001\u76d1\u63a7\u7b49\u754c\u9762\u3002",
+      "highlights": [
+        "\u9002\u5408\u8fde\u63a5\u9875",
+        "\u9002\u5408\u72b6\u6001\u76d1\u63a7",
+        "\u9002\u5408\u4fe1\u53f7\u5c55\u793a"
+      ],
+      "cover": {
+        "label": "Signal",
+        "icon": "fa-wifi",
+        "accent": "#87cbff",
+        "accentSoft": "#ffdeee"
+      }
+    },
+    {
+      "id": "frontend-grid-system",
+      "title": "\u6805\u683c\u7cfb\u7edf",
+      "kind": "Gallery",
+      "category": "frontend",
+      "contentType": "gallery",
+      "detailPath": "pages/project-detail.html?id=frontend-grid-system",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u6805\u683c\u5e03\u5c40\u3001\u591a\u680f\u6392\u5e03\u548c\u7ec4\u4ef6\u77e9\u9635\u3002",
+      "highlights": [
+        "\u9002\u5408\u6805\u683c\u5e03\u5c40",
+        "\u9002\u5408\u591a\u680f\u9875\u9762",
+        "\u9002\u5408\u7ec4\u4ef6\u77e9\u9635"
+      ],
+      "cover": {
+        "label": "Grid",
+        "icon": "fa-th-large",
+        "accent": "#84c7ff",
+        "accentSoft": "#ffd8ec"
+      }
+    },
+    {
+      "id": "frontend-window-frame",
+      "title": "\u7a97\u53e3\u6846\u67b6",
+      "kind": "Gallery",
+      "category": "frontend",
+      "contentType": "gallery",
+      "detailPath": "pages/project-detail.html?id=frontend-window-frame",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u7a97\u53e3\u5f0f\u4ea4\u4e92\u3001\u9875\u9762\u6846\u67b6\u548c\u6a21\u5757\u62c6\u5206\u3002",
+      "highlights": [
+        "\u9002\u5408\u7a97\u53e3\u4ea4\u4e92",
+        "\u9002\u5408\u6846\u67b6\u62c6\u5206",
+        "\u9002\u5408\u591a\u7248\u672c\u8bbe\u8ba1"
+      ],
+      "cover": {
+        "label": "Frame",
+        "icon": "fa-desktop",
+        "accent": "#90d2ff",
+        "accentSoft": "#ffe1f1"
+      }
+    },
+    {
+      "id": "embedded-storage-core",
+      "title": "\u5b58\u50a8\u6838\u5fc3",
+      "kind": "Video",
+      "category": "embedded",
+      "contentType": "video",
+      "detailPath": "pages/project-detail.html?id=embedded-storage-core",
+      "summary": "\u7528\u4e8e\u5c55\u793a\u5b58\u50a8\u3001\u5e95\u5c42\u6838\u5fc3\u6d41\u7a0b\u548c\u8bbe\u5907\u89c6\u9891\u8d44\u6599\u3002",
+      "highlights": [
+        "\u9002\u5408\u6838\u5fc3\u6d41\u7a0b",
+        "\u9002\u5408\u5e95\u5c42\u6f14\u793a",
+        "\u9002\u5408\u89c6\u9891\u8d44\u6599"
+      ],
+      "cover": {
+        "label": "Storage",
+        "icon": "fa-hdd-o",
+        "accent": "#73b6ff",
+        "accentSoft": "#ffd1e6"
+      }
+    }
+  ]
+}

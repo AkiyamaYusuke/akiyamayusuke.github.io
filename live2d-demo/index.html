@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TypeScript HTML App</title>
+  <style>
+    html, body {
+      overflow: hidden;
+      margin: 0;
+    }
+    html {
+      overscroll-behavior-x: none;
+      touch-action: none;
+    }
+    body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    body > canvas:only-child {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <!-- Live2DCubismCore script -->
+  <script src = "./Core/live2dcubismcore.js"></script>
+  <script>
+    (function () {
+      if (location.protocol !== 'file:' || typeof window.fetch !== 'function') {
+        return;
+      }
+
+      const nativeFetch = window.fetch.bind(window);
+
+      function buildLocalResponse(url, requestType) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.responseType = requestType === 'arrayBuffer' ? 'arraybuffer' : 'text';
+
+          xhr.onload = function () {
+            const status = xhr.status || 200;
+            const ok = status >= 200 && status < 300;
+            const isBinary = requestType === 'arrayBuffer';
+            const responseBuffer = isBinary ? (xhr.response || new ArrayBuffer(0)) : new TextEncoder().encode(xhr.responseText || '').buffer;
+            const responseText = isBinary ? new TextDecoder().decode(responseBuffer) : (xhr.responseText || '');
+            resolve({
+              ok,
+              status,
+              url,
+              text: () => Promise.resolve(responseText),
+              json: () => Promise.resolve(JSON.parse(responseText)),
+              arrayBuffer: () => Promise.resolve(
+                requestType === 'arrayBuffer'
+                  ? responseBuffer
+                  : new TextEncoder().encode(responseText).buffer
+              ),
+              blob: () => Promise.resolve(new Blob([
+                requestType === 'arrayBuffer' ? responseBuffer : responseText
+              ]))
+            });
+          };
+
+          xhr.onerror = function () {
+            reject(new Error('Failed to load local file: ' + url));
+          };
+
+          xhr.send();
+        });
+      }
+
+      window.fetch = function (input, init) {
+        const url = typeof input === 'string' ? input : input?.url || '';
+        const resolved = new URL(url, location.href);
+        if (resolved.protocol === 'file:') {
+          const accept = init?.headers?.Accept || '';
+          const requestType = accept.includes('application/octet-stream') || resolved.pathname.endsWith('.moc3')
+            ? 'arrayBuffer'
+            : 'text';
+          return buildLocalResponse(resolved.href, requestType);
+        }
+        return nativeFetch(input, init);
+      };
+    })();
+  </script>
+  <!-- Build script -->
+  <script type="module" crossorigin src="./assets/index-BG7zqF0C.js"></script>
+  <script src="./assets/live2d-hover-follow.js"></script>
+</head>
+<body>
+</body>
+</html>

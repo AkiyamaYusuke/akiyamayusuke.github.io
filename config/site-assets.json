@@ -1,0 +1,35 @@
+{
+  "homeCover": "img/home.jpg",
+  "projectCoverImages": {
+    "android-mobile-ui": "",
+    "frontend-layout-flow": "",
+    "embedded-device-motion": "",
+    "frontend-control-panel": "",
+    "android-camera-capture": "",
+    "embedded-module-scene": "",
+    "android-navigation-explore": "",
+    "embedded-motion-sequence": "",
+    "android-signal-system": "",
+    "frontend-grid-system": "",
+    "frontend-window-frame": "",
+    "embedded-storage-core": ""
+  },
+  "detailImages": {
+    "android-mobile-ui": "",
+    "android-camera-capture": "",
+    "android-navigation-explore": "",
+    "android-signal-system": ""
+  },
+  "detailGalleries": {
+    "frontend-layout-flow": [],
+    "frontend-control-panel": [],
+    "frontend-grid-system": [],
+    "frontend-window-frame": []
+  },
+  "detailVideos": {
+    "embedded-device-motion": "",
+    "embedded-module-scene": "",
+    "embedded-motion-sequence": "",
+    "embedded-storage-core": ""
+  }
+}

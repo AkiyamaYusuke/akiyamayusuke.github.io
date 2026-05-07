@@ -1,37 +1,64 @@
-## Welcome to GitHub Pages
+# AkiyamaYusuke.github.io
 
-You can use the [editor on GitHub](https://github.com/AkiyamaYusuke/AkiyamaYusuke.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+## Asset Config
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+All cover and media paths are managed in:
 
-### Markdown
+- `config/site-assets.json`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Structure:
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```json
+{
+  "homeCover": "",
+  "projectCoverImages": {
+    "android-mobile-ui": ""
+  },
+  "detailImages": {
+    "android-mobile-ui": ""
+  },
+  "detailGalleries": {
+    "frontend-layout-flow": []
+  },
+  "detailVideos": {
+    "embedded-device-motion": ""
+  }
+}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Field usage:
 
-### Jekyll Themes
+- `homeCover`
+  Home cover
+- `projectCoverImages`
+  Card covers used on the home page
+- `detailImages`
+  Single-image project detail media
+- `detailGalleries`
+  Gallery project detail media
+- `detailVideos`
+  Video project detail media
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AkiyamaYusuke/AkiyamaYusuke.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Project metadata is stored in:
 
-### Support or Contact
+- `data/projects.json`
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Pages
+
+- `index.html`
+  Home page
+- `pages/project-detail.html`
+  Reusable project detail page
+- `js/main.js`
+  Home page logic
+- `js/project-detail.js`
+  Detail page logic
+- `js/data/site-data-loader.js`
+  Shared JSON loading and asset resolving logic
+
+## Open Source
+
+- [Live2D Cubism SDK for Web](https://github.com/Live2D/CubismWebFramework)
+- [Live2D Cubism Core](https://www.live2d.com/en/sdk/about/)
+- [Font Awesome](https://fontawesome.com/)
+- [GitHub Pages](https://pages.github.com/)

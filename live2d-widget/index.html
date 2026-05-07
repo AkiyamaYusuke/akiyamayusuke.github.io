@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live2D Widget</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        body {
+            position: relative;
+        }
+
+        canvas {
+            background: transparent !important;
+        }
+    </style>
+</head>
+<body>
+    <script src="./js/L2Dwidget.min.js"></script>
+    <script src="./js/L2Dwidget.0.min.js"></script>
+    <script>
+        (function () {
+            const params = new URLSearchParams(location.search);
+            const width = Math.max(180, Math.round(Number(params.get('width')) || 260));
+            const height = Math.max(260, Math.round(Number(params.get('height')) || 360));
+            const scale = Math.max(0.6, Math.min(1.4, Number(params.get('scale')) || 1));
+            const model = params.get('model') || 'https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json';
+
+            function dispatchMouse(eventType, payload) {
+                const mouseEvent = new MouseEvent(eventType, {
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: payload.clientX,
+                    clientY: payload.clientY,
+                    screenX: payload.screenX || payload.clientX,
+                    screenY: payload.screenY || payload.clientY,
+                    buttons: payload.buttons || 0
+                });
+                window.dispatchEvent(mouseEvent);
+                document.dispatchEvent(mouseEvent);
+            }
+
+            window.addEventListener('message', (event) => {
+                const data = event.data;
+                if (!data || data.type !== 'live2d-widget-pointer') {
+                    return;
+                }
+                dispatchMouse(data.eventType || 'mousemove', data);
+            });
+
+            function boot() {
+                if (!window.L2Dwidget) return;
+                window.L2Dwidget.init({
+                    model: {
+                        jsonPath: model,
+                        scale
+                    },
+                    display: {
+                        position: 'right',
+                        width,
+                        height,
+                        hOffset: 0,
+                        vOffset: -8
+                    },
+                    mobile: {
+                        show: true,
+                        scale
+                    },
+                    react: {
+                        opacityDefault: 1,
+                        opacityOnHover: 1
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', boot, { once: true });
+            } else {
+                boot();
+            }
+        })();
+    </script>
+</body>
+</html>

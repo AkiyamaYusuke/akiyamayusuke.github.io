@@ -1,514 +1,235 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Akiyama Yusuke 的个人主页，展示作品、技能和联系方式。">
+    <meta name="theme-color" content="#eff5ff">
+    <title>Akiyama Yusuke | Personal Home</title>
+    <script>
+        (function () {
+            if (location.protocol !== 'file:') {
+                return;
+            }
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/isotope.css">
-        <link rel="stylesheet" href="css/main.css">
-		
-		<!-- sample color stylesheet 
-		<link rel="stylesheet" href="css/color/blue.css">
-		-->
-		
-        <!-- favicon -->
-        <link rel="icon" type="image/png" href="favicon.png" />
+            const serviceBase = 'http://127.0.0.1:8000';
+            const targetUrl = `${serviceBase}/index.html${location.search || ''}${location.hash || ''}`;
+            const probe = new Image();
+            probe.onload = function () {
+                location.replace(targetUrl);
+            };
+            probe.onerror = function () {
+                document.documentElement.setAttribute('data-runtime-mode', 'file-fallback');
+            };
+            probe.src = `${serviceBase}/favicon.png?probe=20260507c`;
+        })();
+    </script>
 
-		<!-- Google fonts -->
-
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		
-		<script src="../../ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
-    </head>
-    <body data-spy="scroll" data-target=".navbar">
-
-        <div class="navbar affix main-trend-navbar">
-            <div class="navbar-inner">
-                <img src="img/head.jpg" class="profile-pic"/>
-                <a href="#" class="small-nav-toggle"><i class="fa fa-bars"></i></a>
-                <div style="clear:both"></div>
-                 <ul class="nav option-set scroll-link">
-                    <li><a href="#home"><i class="fa fa-coffee"></i> 主页</a></li><li>
-                    <a href="#portfolio"><i class="fa fa-camera"></i> 作品</a></li><li>
-                    <a href="#about"><i class="fa fa-user"></i> 简介</a></li><li>
-                    <a href="#contact"><i class="fa fa-envelope"></i> 联系我</a></li>
-                 </ul>
-				 
-				 <!-- DEMO START -->
-				 <ul class="nav demo-nav">
-                    <li><a href="#demo-content" id="demo-toggle"><i class="fa fa-gear"></i> 标题颜色</a></li>
-				 </ul>
-				 <div class="demo-area">
-					 <span class="demo-msg">Demo Colors:
-					 </span>
-					 <a href="#" style="background:#f8166c" data-color="pink"></a>
-					 <a href="#" style="background:#68a0f5" data-color="blue"></a>
-					 <a href="#" style="background:#32d436" data-color="green"></a>
-					 <a href="#" style="background:#d5c013" data-color="gold"></a>
-					 <a href="#" style="background:#4cb89b" data-color="teal"></a>
-					 <a href="#" style="background:#fe2525" data-color="red"></a>
-				 </div>
-				<script>
-				function change_color(color){
-					var doc = document; // shortcut
-					var head  = doc.getElementsByTagName('head')[0];
-					var link  = doc.createElement('link');
-					link.rel  = 'stylesheet';
-					link.type = 'text/css';
-					link.href = 'css/color/'+color+'.css';
-					link.media = 'all';
-					head.appendChild(link);
-				}
-				$('.demo-area a').click(function(e){
-					e.preventDefault();
-					change_color($(this).attr("data-color"));
-					$('.demo-area').slideUp(150);
-				});
-				$('#demo-toggle').click(function(e){
-					e.preventDefault();
-					$('.demo-area').slideToggle(150);
-				});
-				</script>
-				<style>
-					.demo-area a{
-						width: 17px;
-						height: 17px;
-						display: inline-block;
-						margin: 1px 6px 1px 0;
-						border-radius: 2px;
-						border: 2px solid #f6f6f6;
-						border: 2px solid transparent;
-						transition: 150ms all;
-						-o-transition: 150ms all;
-						-moz-transition: 150ms all;
-						-webkit-transition: 150ms all;
-					}
-					.demo-area a:hover{
-						opacity: 0.9;
-						border-color: rgba(0,0,0,0.4);
-					}
-					.demo-area a:active{
-						box-shadow: none;
-					}
-					span.demo-msg{
-						font-size: 10px;
-						text-transform: uppercase;
-						font-weight: bold;
-						display: block;
-						color: #aaa;
-					}
-					.demo-area{
-						display: none;
-						margin: 10px 12px 5px 12px;
-					}
-					@media(max-width: 767px){
-						.demo-area, .demo-nav{
-							display: none !important;							
-						}
-					}
-				</style>
-				<!-- DEMO END -->
-
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <canvas class="particle-trail" id="particleTrail" aria-hidden="true"></canvas>
+    <canvas class="trail-overlay" id="trailOverlay" aria-hidden="true"></canvas>
+    <canvas class="magic-trail" id="magicTrail" aria-hidden="true"></canvas>
+    <button type="button" class="settings-trigger" id="settingsTrigger" aria-controls="settingsDrawer" aria-expanded="false" aria-label="打开设置">
+        <i class="fa fa-chevron-right settings-trigger__arrow" aria-hidden="true"></i>
+        <i class="fa fa-cog settings-trigger__gear" aria-hidden="true"></i>
+    </button>
+    <aside class="settings-drawer" id="settingsDrawer" aria-hidden="true">
+        <div class="settings-drawer__panel">
+            <div class="settings-drawer__head">
+                <div>
+                    <p class="eyebrow">Settings</p>
+                    <h2>页面设置</h2>
+                </div>
+                <button type="button" class="settings-drawer__close" id="settingsClose" aria-label="关闭设置">
+                    <i class="fa fa-times"></i>
+                </button>
             </div>
-			
+            <div class="settings-drawer__content" id="settingsContent"></div>
         </div>
-		
-		<!-- home begins -->
-        <div id="home" class="content-section masthead-content">
-            <div class="main-masthead">
-                <div class="container masthead-container text-center">
-                    <h1 class="intro-text">Akiyama Yusuke</h1>
-                    <h2 class="intro-secondary">Android开发</h2>
-                    <div class="social-icons">
-                        <a href="https://twitter.com/" class="btn btn-round btn-clear"><i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="https://www.facebook.com/" class="btn btn-round btn-clear"><i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="https://www.google.ca/" class="btn btn-round btn-clear"><i class="fa fa-google-plus"></i>
-                    </a>
-                </div>
-                </div>
-                <img class="masthead-image parallax" src="img/main1.jpg">
-            </div>
-        </div>
-		<!-- home ends -->
-		
-		<!-- portfolio begins -->
-        <div class="content-section" id="portfolio">
-            <div class="container">
-                <h1>Portfolio</h1>
-                <ul class="nav option-isotope" data-option-key="filter">
-                    <li>
-                        <a href="#show-all" data-option-value="*" class="selected btn btn-clear">All
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-option-value=".category-1" class="btn btn-clear">Android
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-option-value=".category-2" class="btn btn-clear">前端
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-option-value=".category-3" class="btn btn-clear">嵌入式
-                        </a>
-                    </li>
-                </ul>
-                <div id="container-isotope" class="super-list clearfix">
-                    <a href="project_image_1.html" class="element category-1">
-                        <img src="img/portfolio/1_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Affliction
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Photo
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_carousel_2.html" class="element category-2">
-                        <img src="img/portfolio/2_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Cascade
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Gallery
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_video_3.html" class="element category-3">
-                        <img src="img/portfolio/3_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Concept
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Video
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_carousel_4.html" class="element category-2">
-                        <img src="img/portfolio/4_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Amorphous
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Gallery
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_image_5.html" class="element category-1">
-                        <img src="img/portfolio/5_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Ethereal
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Photo
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_video_6.html" class="element category-3">
-                        <img src="img/portfolio/6_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Halcyon
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Video
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_image_7.html" class="element category-1">
-                        <img src="img/portfolio/7_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Horizons
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Photo
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_video_8.html" class="element category-3">
-                        <img src="img/portfolio/8_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Nebulous
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Video
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_image_9.html" class="element category-1">
-                        <img src="img/portfolio/9_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Resonance
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Photo
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_carousel_10.html" class="element category-2">
-                        <img src="img/portfolio/10_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Symphony
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Gallery
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_carousel_11.html" class="element category-2">
-                        <img src="img/portfolio/11_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Insouciance
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Gallery
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                    
-                    <a href="project_video_12.html" class="element category-3">
-                        <img src="img/portfolio/12_thumb.jpg" class="portfolio-image" alt="portfolio image"/>
-                        <span class="portfolio-text">
-                            <h3>Vestige
-                            </h3>
-                            <span><i class="fa fa-tag"></i>Video
-                            </span>
-                            <p>Lorem ipsum dolor site amet con, sectetur adipiscing elit.
-                            </p>
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <img class="masthead-image parallax" src="img/main2.jpg">
-		</div>
-		<!-- portfolio ends -->
-		
-		<!-- about begins -->
-		<div class="content-section" id="about">
-            <div class="container">
-                <h1>About</h1>
-                <p class="medium-text">
-                My name is AkiyamaYusuke. I am a <strong>web designer and graphic artist</strong>. I have a passion for creating beautiful designs. I'm always building new and exciting things for the web. I help companies and clients build successful online identities using creativity and innovation.
-                </p>
-                <div class="row-fluid">
-                    <div class="span7">
-                        <h3 class="main-color">Employment</h3>
-                        
-                        <div class="row-employment">
-                            <h4 class="thin-title">Web Designer, ThemeForest</h4>
-                            <strong class="about-meta"><i class="fa fa-calendar"></i>Dec 2012 - July 2013</strong>
-                            <p>Created design solutions that had a high visual impact. Design decisions involved listening to clients and understanding their needs before making design decisions. Produced variety of graphics to communicate a better corporate identity.
-                            </p>
-                        </div>
-                        <div class="row-employment">
-                            <h4 class="thin-title">Digital Artist, GraphicRiver</h4>
-                            <strong class="about-meta"><i class="fa fa-calendar"></i>Dec 2012 - July 2013</strong>
-                            <p>Created design solutions that had a high visual impact. Design decisions involved listening to clients and understanding their needs before making design decisions. Produced variety of graphics to communicate a better corporate identity.
-                            </p>
-                        </div>
-                        <div class="row-employment">
-                            <h4 class="thin-title">Animator, VideoHive</h4>
-                            <strong class="about-meta"><i class="fa fa-calendar"></i>Dec 2012 - July 2013</strong>
-                            <p>Created design solutions that had a high visual impact. Design decisions involved listening to clients and understanding their needs before making design decisions. Produced variety of graphics to communicate a better corporate identity.
-                            </p>
-                        </div>
-						<div class="row-employment">
-                            <h4 class="thin-title">Musician, AudioJungle</h4>
-                            <strong class="about-meta"><i class="fa fa-calendar"></i>Dec 2012 - July 2013</strong>
-                            <p>Created design solutions that had a high visual impact. Design decisions involved listening to clients and understanding their needs before making design decisions. Produced variety of graphics to communicate a better corporate identity.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="span4 offset1">
-                       	<h3 class="main-color">Skills</h3>
-                        <div>
-                            <div class="progress">
-                              <div class="bar" style="width: 90%">
-                                <span>Java</span>
-                              </div>
-                            </div>
-                            <div class="progress">
-                              <div class="bar" style="width: 50%">
-                                <span>pyhthon</span>
-                              </div>
-                            </div>
-                            <div class="progress">
-                              <div class="bar" style="width: 60%">
-                                  <span>C++</span>
-                              </div>
-                            </div>
-                            <div class="progress">
-                              <div class="bar" style="width: 70%">
-                                  <span>C</span>
-                              </div>
-                            </div>
-                            <div class="progress">
-                                <div class="bar" style="width: 55%">
-                                    <span>Linux</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                              <div class="bar" style="width: 50%">
-                                    <span>Web</span>
-                                </div>
-                            </div>
-                        </div>
+    </aside>
+    <div class="page-shell">
+        <div class="orb orb-pink"></div>
+        <div class="orb orb-blue"></div>
 
-                        <h3 class="main-color">Education</h3>
-						<div>
-							<div class="row-edu">
-								<h4 class="thin-title">Bachelor's Degree</h4>
-								<strong class="about-meta">University of xxx, 2020</strong>
-							</div>
-							<div class="row-edu">
-								<h4 class="thin-title">Software Designer Certificate</h4>
-								<strong class="about-meta">2019</strong>
-							</div>
-						</div>
-						<h3 class="main-color">Testimonials</h3>
+        <aside class="sidebar glass-panel">
+            <a class="brand" href="https://github.com/AkiyamaYusuke/" target="_blank" rel="noopener noreferrer" aria-label="打开 GitHub 主页">
+                <img src="https://avatars.githubusercontent.com/u/79816362?v=4" alt="GitHub 头像" class="brand-avatar" id="brandAvatar">
+                <span class="brand-copy">
+                    <strong id="brandName">AkiyamaYusuke</strong>
+                </span>
+            </a>
 
-						<div id="testimonials_carousel" class="carousel slide">
-						  <div class="carousel-inner">
-							<div class="item active">
-							  <blockquote>Akiyama Yusuke is a great guy to work with. Constantly reliable and efficient. A++.
-								<small>Tom</small>
-							  </blockquote>
-							</div>
-							<div class="item">
-							  <blockquote>Delivered results immediately. Impeccable attention to detail.
-								<small>Jane Smith</small>
-							  </blockquote>
-							</div>
-							<div class="item">
-							  <blockquote>Great doing business with you! Absolutely totally satisfied in every way.
-								<small>Mr Boss</small>
-							  </blockquote>
-							</div>
-						  </div>
-						  <ol class="carousel-indicators testimonials">
-							<li data-target="#testimonials_carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#testimonials_carousel" data-slide-to="1" class=""></li>
-							<li data-target="#testimonials_carousel" data-slide-to="2" class=""></li>
-						  </ol>
-						</div>
-                    </div>
-                </div> 
-				
+            <nav class="sidebar-nav" aria-label="主导航">
+                <a href="#home" class="nav-link is-active">
+                    <i class="fa fa-home"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#portfolio" class="nav-link">
+                    <i class="fa fa-play-circle"></i>
+                    <span>作品</span>
+                </a>
+                <a href="#about" class="nav-link">
+                    <i class="fa fa-diamond"></i>
+                    <span>能力</span>
+                </a>
+                <a href="#contact" class="nav-link">
+                    <i class="fa fa-envelope"></i>
+                    <span>联系</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-actions">
+                <a class="topbar-action" href="#contact">合作咨询</a>
+                <a class="sidebar-ghost" href="#portfolio">进入作品墙</a>
             </div>
-            <img class="masthead-image parallax" src="img/main3.jpg">
-		</div>
-		<!-- about ends -->
-		
-		<!-- contact begins -->
-		<div class="content-section" id="contact">
-            <div class="container">
-                <h1>Contact</h1>
-                <div clas="row-fluid">
-                    <iframe  class="google-maps-embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ca/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=toronto+on&amp;aq=&amp;sll=37.746015,-122.205048&amp;sspn=0.084022,0.177841&amp;gl=ca&amp;ie=UTF8&amp;hq=&amp;hnear=Toronto,+Toronto+Division,+Ontario&amp;ll=43.653226,-79.383184&amp;spn=0.01922,0.04446&amp;t=m&amp;z=14&amp;output=embed"></iframe>
+        </aside>
+
+        <main class="content-stage">
+            <section id="home" class="home-stage stage-panel">
+                <div class="home-scene reveal">
+                    <div class="home-backdrop tilt-card">
+                        <div class="home-cover-layer" id="homeCoverLayer" aria-hidden="true"></div>
+                        <div class="background-effects-layer" id="backgroundEffectsLayer" aria-hidden="true"></div>
+                        <div class="background-overlay"></div>
+                        <div class="home-copy">
+                            <h2>清晰、顺滑、带有舞台感的个人主页。</h2>
+
+                            <div class="home-actions">
+                                <a class="btn btn-primary ripple" href="#portfolio">看作品</a>
+                                <a class="btn btn-secondary ripple" href="#about">看能力</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-meta-row">
+                        <a class="glass-card profile-card tilt-card profile-link" href="https://github.com/AkiyamaYusuke/" target="_blank" rel="noopener noreferrer" aria-label="打开 GitHub 主页">
+                            <img src="https://avatars.githubusercontent.com/u/79816362?v=4" alt="GitHub 头像" class="profile-image" id="profileAvatar">
+                            <div>
+                                <p class="profile-status"><span></span> Available for collaboration</p>
+                                <h2 id="profileName">AkiyamaYusuke</h2>
+                            </div>
+                        </a>
+
+                        <div class="home-metrics" id="homeMetrics"></div>
+                    </div>
                 </div>
-                <br>
-                <div class="row-fluid">
-					
-                    <div class="span5">
-                        <h3 class="main-color">Personal Info</h3>
-                        <p class="medium-text">
-                            <i class="fa fa-user h4-icon"></i> pymeia
-                        <br>
-                            <i class="fa fa-phone h4-icon"></i> xxxxxxxxxx
-                        <br>
-                            <i class="fa fa-home h4-icon"></i> 123 Street, City Address
-                        <br>
-                            <i class="fa fa-envelope h4-icon"></i> pymeia@163.com
-                        <br>
-                            <i class="fa fa-facebook h4-icon"></i> facebook.com/AkiyamaYusuke
-                        <br>
-                            <i class="fa fa-twitter h4-icon"></i> @AkiyamaYusuke
-                        </p>
+            </section>
+
+            <section class="section stage-panel">
+                <div class="section-head reveal">
+                    <div>
+                        <h2>一眼看懂我能做什么</h2>
                     </div>
-                    <div class="span7">
-                         <h3 class="main-color">Email Me</h3>
-                         <form class="contact_form" id="contact_form">
-                            <div class="contact-row">
-                                  <i class="fa fa-user"></i>
-                                  <input type="text" id="fname" placeholder="Name">
-                            </div>
-                            <div class="contact-row">
-                                  <i class="fa fa-envelope"></i>
-                                  <input type="text" id="email" placeholder="Email">      
-                            </div> 
-                            <div class="contact-row">
-                                  <i class="fa fa-comment"></i>
-                                  <textarea id="message" name="message" placeholder="Message"></textarea>
-                            </div>
-                            <button type="submit" id="submit_contact_info" class="btn btn-primary btn-large btn-clear">Send message <i class="fa fa-envelope"></i></button>
-                        </form>
-                        <div class="alert-success alert">
-                                Thank you for your message! I will get back to you as soon as possible.
-                            </div>
-                            <div class="alert-error alert">
-                                Sorry, your message was not sent successfully.
-                            </div>
+                </div>
+                <div class="stats-grid" id="statsGrid"></div>
+            </section>
+
+            <section id="portfolio" class="section stage-panel">
+                <div class="section-head reveal">
+                    <div>
+                        <h2>精选作品</h2>
                     </div>
-				</div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <strong>&copy; Copyright 2013 Trends HTML Template
-                </strong>
-            </div>
-            <img class="masthead-image parallax" src="img/main4.jpg">
-		</div>
-		<!-- contact ends -->
-		
-        <div class="overlay"></div>
-        <div class="portfolio-overlay">
+                </div>
+
+                <div class="filter-bar reveal" id="projectFilters" aria-label="作品筛选"></div>
+                <div class="projects-grid" id="projectGrid"></div>
+            </section>
+
+            <section id="about" class="section stage-panel">
+                <div class="section-head reveal">
+                    <div>
+                        <h2>能力与经历</h2>
+                    </div>
+                </div>
+
+                <div class="split-grid">
+                    <article class="glass-card reveal tilt-card">
+                        <h3>技术重点</h3>
+                        <div class="skills-list" id="skillsList"></div>
+                    </article>
+
+                    <article class="glass-card reveal tilt-card">
+                        <h3>成长路径</h3>
+                        <div class="timeline" id="timelineList"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="contact" class="section stage-panel">
+                <div class="section-head reveal">
+                    <div>
+                        <h2>联系我</h2>
+                    </div>
+                </div>
+
+                <div class="contact-grid">
+                    <article class="glass-card reveal tilt-card">
+                        <h3>联系渠道</h3>
+                        <div class="contact-list" id="contactList"></div>
+                    </article>
+
+                    <article class="glass-card reveal tilt-card">
+                        <h3>快速入口</h3>
+                        <div class="cta-stack">
+                            <a class="btn btn-primary ripple" href="mailto:pymeia@163.com">发邮件</a>
+                            <a class="btn btn-secondary ripple" href="https://github.com/AkiyamaYusuke/" target="_blank" rel="noopener noreferrer">看 GitHub</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <span>© <span id="year"></span> <span id="footerName">Akiyama Yusuke</span></span>
+                <span>Built for a cleaner, smoother personal home.</span>
+            </footer>
+        </main>
+    </div>
+
+    <section class="live2d-dock" id="live2dDock" aria-label="Live2D 角色">
+        <div class="live2d-scale-popover" id="live2dScalePopover">
+            <span>角色大小</span>
+            <input type="range" id="dockScale" min="0.65" max="1.45" step="0.05" value="1">
         </div>
-       
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/vendor/jquery.ui.ease.js"></script>
-        <script src="js/vendor/jquery.isotope.min.js"></script>
-        <!--[if lte IE 9]>
-            <script src="js/ie.js"></script>
-        <![endif]-->
-        <script src="js/main.js"></script>
-        
-    </body>
+        <div class="live2d-stage" id="dockHandle">
+            <iframe
+                id="live2dFrame"
+                class="live2d-frame"
+                title="Live2D 角色"
+                loading="eager"
+                referrerpolicy="no-referrer"
+            ></iframe>
+            <div class="live2d-fallback" id="live2dFallback">
+                <div class="fallback-orb"></div>
+                <div class="fallback-face">
+                    <span></span>
+                    <span></span>
+                    <i></i>
+                </div>
+            </div>
+            <canvas id="live2dCanvas" class="live2d-canvas" aria-hidden="true"></canvas>
+        </div>
+    </section>
+
+    <script src="js/effects/particle-primitives.js?v=20260507b"></script>
+    <script src="js/effects/particle-network-effect.js?v=20260507b"></script>
+    <script src="js/effects/trail-ripple-effect.js?v=20260507b"></script>
+    <script src="js/effects/click-sigil-effect.js?v=20260507b"></script>
+    <script src="js/effects/jellyfish-background-effect.js?v=20260507b"></script>
+    <script src="js/effects/vendor/rainyday.js?v=20260507b"></script>
+    <script src="js/effects/rain-glass-background-effect.js?v=20260507b"></script>
+    <script src="js/config/runtime-path-resolver.js?v=20260507b"></script>
+    <script src="js/config/generated-site-data.js?v=20260507b"></script>
+    <script src="js/data/site-data-loader.js?v=20260507b"></script>
+    <script src="js/settings/site-settings-store.js?v=20260507b"></script>
+    <script src="js/settings/home-settings-config.js?v=20260507b"></script>
+    <script src="js/settings/settings-drawer.js?v=20260507b"></script>
+    <script src="js/background/background-effects-controller.js?v=20260507b"></script>
+    <script src="js/live2d/live2d-dock-controller.js?v=20260507b"></script>
+    <script src="js/main.js?v=20260507b"></script>
+</body>
 </html>

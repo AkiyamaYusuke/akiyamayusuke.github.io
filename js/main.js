@@ -1,6 +1,8 @@
 ﻿(function () {
     const assetConfigUrl = 'config/site-assets.json';
     const projectDataUrl = 'data/projects.json';
+    const defaultSettingsUrl = 'config/site-default-settings.json';
+    const circleGalleryConfigUrl = 'config/portfolio-circle-gallery.json';
     const generatedSiteData = window.GeneratedSiteData || {};
 
     const metrics = [
@@ -246,6 +248,8 @@
     let backgroundEffectsController = null;
     let settingsStore = null;
     let settingsDrawer = null;
+    let portfolioLayoutController = null;
+    let tarotFeature = null;
     let effectState = null;
     let assetPathConfig = {
         homeCover: '',
@@ -258,25 +262,62 @@
         homeCover: '',
         projectCoverImages: {}
     };
+    let circleGalleryImages = {};
+    let defaultSettingsConfig = {
+        theme: {
+            preference: 'auto'
+        },
+        effects: {
+            particles: false,
+            trail: true,
+            click: true
+        },
+        background: {
+            blur: 72,
+            effect: 'rain'
+        },
+        portfolio: {
+            layout: 'circle'
+        },
+        live2d: {
+            renderer: 'sdk'
+        }
+    };
+
+    function mergeDeep(base, patch) {
+        if (Array.isArray(base)) return Array.isArray(patch) ? patch.slice() : base.slice();
+        if (!base || typeof base !== 'object') return patch ?? base;
+
+        const next = { ...base };
+        Object.keys(next).forEach((key) => {
+            next[key] = mergeDeep(next[key], patch?.[key]);
+        });
+
+        if (patch && typeof patch === 'object') {
+            Object.keys(patch).forEach((key) => {
+                if (!(key in next)) {
+                    next[key] = patch[key];
+                }
+            });
+        }
+
+        return next;
+    }
 
     function getDefaultSettings() {
-        return {
-            theme: {
-                preference: localStorage.getItem(storageKeys.theme) || 'light'
-            },
-            effects: {
-                particles: false,
-                trail: true,
-                click: true
-            },
-            background: {
-                blur: 72,
-                effect: 'none'
-            },
-            live2d: {
-                renderer: location.protocol === 'file:' ? 'widget' : 'sdk'
-            }
-        };
+        return structuredClone(defaultSettingsConfig);
+    }
+
+    async function loadDefaultSettingsConfig() {
+        if (!window.SiteDataLoader) return;
+        const parsed = await window.SiteDataLoader.loadJson(defaultSettingsUrl, defaultSettingsConfig);
+        defaultSettingsConfig = mergeDeep(defaultSettingsConfig, parsed || {});
+    }
+
+    async function loadCircleGalleryImages() {
+        if (!window.SiteDataLoader) return;
+        const parsed = await window.SiteDataLoader.loadJson(circleGalleryConfigUrl, { items: circleGalleryImages });
+        circleGalleryImages = parsed?.items && typeof parsed.items === 'object' ? parsed.items : {};
     }
 
     async function loadAssetConfig() {
@@ -313,12 +354,17 @@
     }
 
     function resolveConfiguredImagePath(configuredPath, resolvedPath) {
+        const normalizedConfiguredPath = (configuredPath || '').trim();
         if (resolvedPath) {
             return window.RuntimePathResolver?.preferServedAsset(resolvedPath) || resolvedPath;
         }
 
-        if (location.protocol === 'file:' && configuredPath && configuredPath.trim()) {
-            return window.RuntimePathResolver?.preferServedAsset(configuredPath.trim()) || configuredPath.trim();
+        if (/^(https?:)?\/\//.test(normalizedConfiguredPath) || normalizedConfiguredPath.startsWith('data:')) {
+            return normalizedConfiguredPath;
+        }
+
+        if (location.protocol === 'file:' && normalizedConfiguredPath) {
+            return window.RuntimePathResolver?.preferServedAsset(normalizedConfiguredPath) || normalizedConfiguredPath;
         }
 
         return '';
@@ -458,22 +504,42 @@
         `;
     }
 
-    function renderProjectCover(item) {
+    function getProjectCoverData(item) {
         const imagePath = resolveConfiguredImagePath(
             assetPathConfig.projectCoverImages[item.id],
             resolvedAssetPaths.projectCoverImages[item.id]
         );
         const cover = item.cover || {};
-
-        if (imagePath) {
-            const fallbackPath = (assetPathConfig.projectCoverImages[item.id] || '').trim();
-            return renderManagedImage('project-thumb', imagePath, fallbackPath, cover.label || item.title);
-        }
-
         const accent = cover.accent || '#7dbbff';
         const accentSoft = cover.accentSoft || '#ffd7ea';
         const icon = cover.icon || `fa-${categoryIcons[item.category]}`;
         const label = cover.label || categoryLabels[item.category];
+
+        return {
+            imagePath,
+            circleImagePath: resolveConfiguredImagePath(circleGalleryImages[item.id], ''),
+            fallbackPath: (assetPathConfig.projectCoverImages[item.id] || '').trim(),
+            accent,
+            accentSoft,
+            icon,
+            label,
+            cover
+        };
+    }
+
+    function renderProjectCover(item) {
+        const {
+            imagePath,
+            fallbackPath,
+            accent,
+            accentSoft,
+            icon,
+            label
+        } = getProjectCoverData(item);
+
+        if (imagePath) {
+            return renderManagedImage('project-thumb', imagePath, fallbackPath, label || item.title);
+        }
 
         return `
             <div class="project-thumb project-thumb--icon" aria-hidden="true" style="--cover-accent:${accent};--cover-accent-soft:${accentSoft};">
@@ -488,6 +554,37 @@
                 <span class="project-thumb__mini project-thumb__mini-c">+</span>
             </div>
         `;
+    }
+
+    function initPortfolioLayout() {
+        if (!window.PortfolioLayoutController) {
+            renderFilters();
+            renderProjects();
+            bindFilters();
+            return;
+        }
+
+        portfolioLayoutController = new window.PortfolioLayoutController({
+            filtersHost,
+            gridHost,
+            categoryLabels,
+            categoryIcons,
+            getProjects: () => projects,
+            getHref: (item) => item.detailPath || `pages/project-detail.html?id=${item.id}`,
+            resolveCoverData: getProjectCoverData,
+            getCenterProfile: () => ({
+                name: (profileName?.textContent || brandName?.textContent || githubUsername).trim(),
+                avatar: profileAvatar?.getAttribute('src') || brandAvatar?.getAttribute('src') || '',
+                subtitle: '精选作品'
+            }),
+            onAfterRender: () => {
+                bindTiltInteractions();
+                bindRippleInteractions();
+                observeReveals();
+            }
+        });
+
+        portfolioLayoutController.init();
     }
 
     function renderProjects(filter = 'all') {
@@ -679,6 +776,7 @@
         applyEffectState();
         backgroundEffectsController?.apply(state.background);
         live2dDockController?.applySettings(state.live2d);
+        portfolioLayoutController?.setMode(state.portfolio?.layout || 'grid');
     }
 
     function initSettings() {
@@ -705,7 +803,10 @@
             close: settingsClose,
             content: settingsContent,
             sections: window.HomeSettingsConfig,
-            store: settingsStore
+            store: settingsStore,
+            actions: {
+                openTarot: () => tarotFeature?.open()
+            }
         });
 
         settingsDrawer.init();
@@ -758,18 +859,18 @@
 
         await loadProjectCatalog();
         await loadAssetConfig();
+        await loadDefaultSettingsConfig();
+        await loadCircleGalleryImages();
         await resolveAssetPaths();
 
         renderMetrics();
         renderStats();
         renderHomeCover();
-        renderFilters();
-        renderProjects();
+        initPortfolioLayout();
         renderSkills();
         renderTimeline();
         renderContacts();
 
-        bindFilters();
         bindPointerParallax();
         bindTiltInteractions();
         bindRippleInteractions();
@@ -787,6 +888,13 @@
             backgroundEffectsController.init();
         }
         initSettings();
+        if (window.TarotFeature) {
+            tarotFeature = new window.TarotFeature({
+                title: '算一算今日运势',
+                storageKey: 'akiyama-tarot-reading'
+            });
+            tarotFeature.init();
+        }
         if (window.Live2DDockController) {
             live2dDockController = new window.Live2DDockController({
                 storageKey: 'akiyama-live2d-dock',
@@ -795,8 +903,8 @@
                 scaleSelector: '#dockScale',
                 frameSelector: '#live2dFrame',
                 fallbackSelector: '#live2dFallback',
-                baseUrl: './live2d-demo/index.html',
-                fileFallbackUrl: 'http://127.0.0.1:8000/live2d-demo/index.html',
+                sdkUrl: './live2d-demo/index.html',
+                widgetUrl: './live2d-widget/index.html',
                 defaultModelPath: 'Haru/Haru.model3.json',
                 baseWidth: 280,
                 baseHeight: 380

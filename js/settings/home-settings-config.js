@@ -26,6 +26,21 @@
             ]
         },
         {
+            id: 'portfolio',
+            title: '\u4f5c\u54c1\u89c6\u56fe',
+            items: [
+                {
+                    type: 'choice',
+                    path: 'portfolio.layout',
+                    label: '\u7cbe\u9009\u4f5c\u54c1\u6392\u5e03',
+                    options: [
+                        { value: 'grid', label: '\u5e73\u94fa\u5361\u7247' },
+                        { value: 'circle', label: '\u5706\u5f62\u753b\u5eca' }
+                    ]
+                }
+            ]
+        },
+        {
             id: 'background',
             title: '\u80cc\u666f\u6548\u679c',
             items: [
@@ -62,6 +77,18 @@
                         { value: 'widget', label: 'Widget \u8ddf\u968f' },
                         { value: 'sdk', label: '\u5b98\u65b9 SDK' }
                     ]
+                }
+            ]
+        },
+        {
+            id: 'playground',
+            title: '\u8f7b\u677e\u5165\u53e3',
+            items: [
+                {
+                    type: 'action',
+                    actionId: 'openTarot',
+                    label: '\u7b97\u4e00\u7b97\u4eca\u65e5\u8fd0\u52bf',
+                    description: '\u4e00\u4e2a\u4f4e\u8c03\u7684\u5c0f\u6d4b\u8bd5\uff0c\u60f3\u73a9\u7684\u65f6\u5019\u518d\u6253\u5f00'
                 }
             ]
         }

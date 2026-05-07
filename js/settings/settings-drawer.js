@@ -1,12 +1,13 @@
 (function () {
     class SettingsDrawer {
-        constructor({ root, trigger, close, content, sections, store }) {
+        constructor({ root, trigger, close, content, sections, store, actions }) {
             this.root = root;
             this.trigger = trigger;
             this.closeButton = close;
             this.content = content;
             this.sections = sections;
             this.store = store;
+            this.actions = actions || {};
             this.open = false;
             this.rangeTimers = new Map();
             this.activeRangePath = '';
@@ -75,6 +76,13 @@
                 });
             });
 
+            this.content.querySelectorAll('[data-setting-action]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const actionId = button.dataset.settingAction;
+                    this.actions[actionId]?.(button);
+                });
+            });
+
             this.content.querySelectorAll('[data-setting-range]').forEach((range) => {
                 range.addEventListener('input', () => {
                     this.startRangeInteraction(range);
@@ -90,6 +98,24 @@
         }
 
         renderItem(item, state) {
+            if (item.type === 'action') {
+                return `
+                    <button
+                        type="button"
+                        class="settings-action"
+                        data-setting-action="${item.actionId}"
+                    >
+                        <span class="settings-action__copy">
+                            <span class="settings-action__label">${item.label}</span>
+                            ${item.description ? `<span class="settings-action__description">${item.description}</span>` : ''}
+                        </span>
+                        <span class="settings-action__icon">
+                            <i class="fa fa-moon-o" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                `;
+            }
+
             const value = this.storeValue(state, item.path);
             if (item.type === 'choice') {
                 return `
@@ -145,6 +171,7 @@
         }
 
         storeValue(state, path) {
+            if (!path) return undefined;
             return path.split('.').reduce((value, key) => value?.[key], state);
         }
 

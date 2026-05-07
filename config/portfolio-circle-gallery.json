@@ -1,0 +1,16 @@
+{
+  "items": {
+    "android-mobile-ui": "https://picsum.photos/id/27/1200/1200",
+    "frontend-layout-flow": "https://picsum.photos/id/25/1200/1200",
+    "embedded-device-motion": "https://picsum.photos/id/372/1200/1200",
+    "frontend-control-panel": "https://picsum.photos/id/380/1200/1200",
+    "android-camera-capture": "https://picsum.photos/id/392/1200/1200",
+    "embedded-module-scene": "https://picsum.photos/id/456/1200/1200",
+    "android-navigation-explore": "https://picsum.photos/id/469/1200/1200",
+    "embedded-motion-sequence": "https://picsum.photos/id/569/1200/1200",
+    "android-signal-system": "https://picsum.photos/id/515/1200/1200",
+    "frontend-grid-system": "https://picsum.photos/id/521/1200/1200",
+    "frontend-window-frame": "https://picsum.photos/id/549/1200/1200",
+    "embedded-storage-core": "https://picsum.photos/id/569/1200/1200"
+  }
+}

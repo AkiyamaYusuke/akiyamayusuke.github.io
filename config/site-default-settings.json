@@ -1,0 +1,20 @@
+{
+  "theme": {
+    "preference": "auto"
+  },
+  "effects": {
+    "particles": false,
+    "trail": true,
+    "click": true
+  },
+  "background": {
+    "blur": 72,
+    "effect": "rain"
+  },
+  "portfolio": {
+    "layout": "circle"
+  },
+  "live2d": {
+    "renderer": "sdk"
+  }
+}

@@ -755,26 +755,36 @@
             clickSigilEffect = new window.ClickSigilEffect(magicTrail);
         }
 
-        await loadProjectCatalog();
-        await loadAssetConfig();
-        await loadDefaultSettingsConfig();
-        await loadCircleGalleryImages();
-        await loadSiteCopy();
-        await resolveAssetPaths();
+        // 各内容源互不依赖:并行抓取,首屏等待 ≈ 最慢一个请求,而不是逐个累加。
+        // 慢主机(如线上 ~35KB/s)上顺序 await 会放大到十几秒,并行可显著缩短空窗。
+        await Promise.all([
+            loadProjectCatalog(),
+            loadAssetConfig(),
+            loadDefaultSettingsConfig(),
+            loadCircleGalleryImages(),
+            loadSiteCopy()
+        ]);
 
+        // 纯文案区先渲染并立即揭幕——不等封面图探针,保证首屏"秒出内容"。
         renderMetrics();
         renderStats();
-        renderHomeCover();
-        initPortfolioLayout();
         renderSkills();
         renderTimeline();
         renderContacts();
 
+        bindScrollState();
+        setActiveNav();
+        observeReveals();
+
+        // 需要真实封面路径的 home 封面 + 作品环:封面图探针已限时(见 probeImage),
+        // 服务器再慢也只会让这一层稍后出现,绝不会再阻塞整站渲染。
+        await resolveAssetPaths();
+        renderHomeCover();
+        initPortfolioLayout();
+
         bindPointerParallax();
         bindTiltInteractions();
         bindRippleInteractions();
-        bindScrollState();
-        setActiveNav();
         observeReveals();
         if (window.BackgroundEffectsController) {
             backgroundEffectsController = new window.BackgroundEffectsController({

@@ -123,15 +123,27 @@
         return raw.items;
     }
 
-    function probeImage(path) {
+    function probeImage(path, timeoutMs) {
         return new Promise((resolve) => {
             if (!path || typeof path !== 'string') {
                 resolve('');
                 return;
             }
+            // 探图限时:服务器很慢或图片迟迟不返回时,绝不无限期阻塞渲染链。
+            const ms = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 3500;
             const img = new Image();
-            img.onload = () => resolve(path);
-            img.onerror = () => resolve('');
+            let settled = false;
+            const finish = (value) => {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timer);
+                resolve(value);
+            };
+            img.onload = () => finish(path);
+            img.onerror = () => finish(''); // 真实 404/解码失败(通常很快)→ 判定不可用
+            // 超时:多半是慢网络上的真图 → 乐观保留路径,让 <img> 自己后台流入,
+            // 而不是把本来就存在的封面判定为缺失。
+            const timer = setTimeout(() => finish(path), ms);
             img.src = path;
         });
     }

@@ -1,0 +1,14 @@
+# 发布清单:列出要打进发布包的顶层条目(相对仓库根)。
+# 未列出的(scripts/ README .git .claude deployment logs 等)不进包。
+index.html
+favicon.svg
+favicon.png
+pages
+css
+js
+fonts
+img
+data
+config
+live2d-widget
+live2d-demo

@@ -55,7 +55,7 @@
     font-size: 0.72rem;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: #111;
+    color: var(--text);
     font-family: "Jura", "Segoe UI", sans-serif;
     white-space: nowrap;
 }
@@ -65,7 +65,7 @@
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(20, 28, 42, 0.52);
+    color: var(--muted);
     overflow-wrap: anywhere;
 }
 
@@ -107,7 +107,14 @@
 .source-gallery-item a:hover,
 .source-gallery-item a:focus-visible {
     transform: scale(1.06);
-    box-shadow: 0 24px 40px rgba(69, 95, 138, 0.24);
+}
+
+.source-gallery-item a:focus-visible {
+    outline: none;
+    border-color: color-mix(in srgb, var(--accent) 72%, var(--line-strong));
+    box-shadow:
+        0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent),
+        0 24px 40px rgba(69, 95, 138, 0.24);
 }
 
 .source-gallery-wrapper:has(> .source-gallery-item:hover) > .source-gallery-item:hover + .source-gallery-item,

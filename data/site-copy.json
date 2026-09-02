@@ -1,0 +1,81 @@
+{
+    "meta": {
+        "title": "你的名字 · 你的技术定位 | 个人主页",
+        "description": "模板示例文案：请把 data/site-copy.json 替换成你自己的内容，或在同目录放一份 data/site-copy.local.json 覆盖。"
+    },
+    "nav": {
+        "home": "首页",
+        "portfolio": "作品",
+        "about": "能力",
+        "contact": "联系",
+        "cta": "合作咨询",
+        "ghost": "进入链路"
+    },
+    "brand": {
+        "sub": "领域 · 关键词"
+    },
+    "home": {
+        "title": "领域 · 关键词",
+        "lede": "一句话说明你做什么。例如：把一块屏的画面以低延迟、高质量送到另一块屏——整条链路是你的主场。",
+        "mono": "// 你的技术宣言，可以在这里写一句",
+        "actionPortfolio": "看作品",
+        "actionAbout": "看能力"
+    },
+    "profile": {
+        "status": "你的头衔 · 你的代表项目作者",
+        "subtitle": "领域 A × 领域 B × 领域 C"
+    },
+    "metrics": [
+        { "value": "指标一", "label": "一句话说明这个数字" },
+        { "value": "指标二", "label": "一句话说明这个数字" },
+        { "value": "指标三", "label": "一句话说明这个数字" }
+    ],
+    "sections": {
+        "tech": {
+            "heading": "技术纵深",
+            "cards": [
+                { "label": "能力点一", "value": "写一两句能证明这个能力的事。" },
+                { "label": "能力点二", "value": "写一两句能证明这个能力的事。" },
+                { "label": "能力点三", "value": "写一两句能证明这个能力的事。" },
+                { "label": "能力点四", "value": "写一两句能证明这个能力的事。" }
+            ]
+        },
+        "portfolio": {
+            "heading": "作品区",
+            "sub": "模板示例文案。作品列表见 data/projects.json，封面路径见 config/site-assets.json。"
+        },
+        "about": {
+            "heading": "能力 · 成长路径",
+            "skillsHeading": "技术重点",
+            "timelineHeading": "成长路径",
+            "skills": [
+                { "name": "技能一", "value": 85 },
+                { "name": "技能二", "value": 80 },
+                { "name": "技能三", "value": 70 },
+                { "name": "技能四", "value": 60 }
+            ],
+            "timeline": [
+                { "title": "经历一：做了什么、做出什么结果", "time": "20xx" },
+                { "title": "经历二：做了什么、做出什么结果", "time": "20xx–20xx" }
+            ]
+        },
+        "contact": {
+            "heading": "联系我",
+            "channelsHeading": "联系渠道",
+            "quickHeading": "快速入口",
+            "quickMail": "发邮件",
+            "quickGithub": "看 GitHub",
+            "channels": [
+                { "label": "邮箱", "value": "you@example.com", "href": "mailto:you@example.com" },
+                { "label": "GitHub", "value": "github.com/your-name", "href": "https://github.com/your-name/" },
+                { "label": "站点 / 方向", "value": "一句话", "href": "#about" }
+            ]
+        }
+    },
+    "footer": {
+        "tagline": "领域 · 关键词 —— 以技术为笔的个人主页"
+    },
+    "live2d": {
+        "scaleLabel": "角色大小"
+    }
+}

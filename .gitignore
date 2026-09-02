@@ -1,1 +1,15 @@
 *.bak
+
+# 部署工具:真实连接配置、本地临时构建与日志不入库(本站是公开仓库)
+deployment/site-deploy.local.json
+deployment/*.local.json
+deployment/logs/
+deployment/*.last.log
+deployment/temp_build/
+
+# 站点内容真实层:个人本地覆盖(data/site-copy.local.json 等)优先级高于提交的模板,但只留本机、不入模板提交
+data/*.local.json
+config/*.local.json
+
+# 内嵌快照由 scripts/sync-site-data.mjs 生成(sync 会合并本地真实层),属本地构建产物,不入模板提交
+js/config/generated-site-data.js

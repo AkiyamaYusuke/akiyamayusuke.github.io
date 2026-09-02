@@ -1,0 +1,12 @@
+{
+  "ToolTitle": "Site Deploy",
+  "ServerHost": "your.server.example.com",
+  "ServerUser": "deploy",
+  "ServerPort": 22,
+  "TargetDir": "/opt/static-site",
+  "PublicBaseUrl": "https://example.com",
+  "PublicPrefix": "/sites",
+  "ReleaseNotes": "",
+  "KeepPrevCount": 1,
+  "ThemeMode": "Dark"
+}

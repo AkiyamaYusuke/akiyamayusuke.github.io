@@ -76,6 +76,29 @@
         }
     }
 
+    // 个人本地覆盖 <base>.local.json 的候选路径（config/x.json -> config/x.local.json）。
+    function toLocalCandidate(url) {
+        return String(url).replace(/\.json$/, '.local.json');
+    }
+
+    // 分层加载站点内容：本地个人覆盖 .local.json > 提交的实例配置(url) > 内置默认(fallback)。
+    // 任一层 404 / 读空 / 解析失败都静默降级到下一层；无 .local 时行为与 loadJson 完全一致。
+    async function loadContentJson(url, fallback) {
+        const candidates = [toLocalCandidate(url), url];
+        for (const candidate of candidates) {
+            try {
+                const text = await requestText(candidate);
+                const parsed = JSON.parse(text);
+                if (parsed && typeof parsed === 'object') {
+                    return parsed;
+                }
+            } catch {
+                // try next candidate
+            }
+        }
+        return fallback;
+    }
+
     function normalizeAssetConfig(raw) {
         const config = raw && typeof raw === 'object' ? raw : {};
         const ensureObject = (value) => (value && typeof value === 'object' && !Array.isArray(value) ? value : {});
@@ -131,6 +154,8 @@
     window.SiteDataLoader = {
         requestText,
         loadJson,
+        loadContentJson,
+        toLocalCandidate,
         normalizeAssetConfig,
         normalizeProjectCatalog,
         probeImage,

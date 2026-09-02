@@ -3,198 +3,45 @@
     const projectDataUrl = 'data/projects.json';
     const defaultSettingsUrl = 'config/site-default-settings.json';
     const circleGalleryConfigUrl = 'config/portfolio-circle-gallery.json';
+    const siteCopyUrl = 'data/site-copy.json';
     const generatedSiteData = window.GeneratedSiteData || {};
 
-    const metrics = [
-        { value: '12+', label: '作品页' },
-        { value: '3', label: '主方向' },
-        { value: '100%', label: '可扩展' }
-    ];
+    // 首页文案与内容列表统一由 data/site-copy.json 驱动(sync 脚本并进 GeneratedSiteData)：
+    // 改 JSON 即改站。以下数组在 loadSiteCopy() 时填充,渲染函数保持 map 通用。
+    let metrics = [];
+    let stats = [];
+    let skills = [];
+    let timeline = [];
+    let contacts = [];
 
-    const stats = [
-        { label: '技术栈', value: 'Android / Web / C' },
-        { label: '设计风格', value: 'Apple-like UI' },
-        { label: '作品组织', value: 'Bilibili 式卡片流' },
-        { label: '更新方式', value: 'JSON 配置' }
-    ];
-
-    const defaultProjects = [
-        {
-            id: 'android-mobile-ui',
-            title: '移动端界面',
-            kind: 'Image',
-            category: 'android',
-            contentType: 'image',
-            detailPath: 'pages/project-detail.html?id=android-mobile-ui',
-            summary: '用于展示 Android 页面风格、交互层级和移动端视觉排布。',
-            highlights: ['适合单图展示', '适合界面稿', '适合产品封面'],
-            cover: { label: 'Android UI', icon: 'fa-mobile', accent: '#7dbbff', accentSoft: '#ffd7ea' }
-        },
-        {
-            id: 'frontend-layout-flow',
-            title: '布局流转',
-            kind: 'Gallery',
-            category: 'frontend',
-            contentType: 'gallery',
-            detailPath: 'pages/project-detail.html?id=frontend-layout-flow',
-            summary: '用于展示多张布局方案、交互流程图和页面演进稿。',
-            highlights: ['适合多图展示', '适合流程稿', '适合页面演化'],
-            cover: { label: 'Layout', icon: 'fa-columns', accent: '#8fd5ff', accentSoft: '#ffe2ef' }
-        },
-        {
-            id: 'embedded-device-motion',
-            title: '设备动态',
-            kind: 'Video',
-            category: 'embedded',
-            contentType: 'video',
-            detailPath: 'pages/project-detail.html?id=embedded-device-motion',
-            summary: '用于展示设备联动、动作演示、录屏流程和硬件动态内容。',
-            highlights: ['适合演示视频', '适合录屏', '适合设备动作'],
-            cover: { label: 'Device', icon: 'fa-cogs', accent: '#76b8ff', accentSoft: '#ffd1e2' }
-        },
-        {
-            id: 'frontend-control-panel',
-            title: '控制面板',
-            kind: 'Gallery',
-            category: 'frontend',
-            contentType: 'gallery',
-            detailPath: 'pages/project-detail.html?id=frontend-control-panel',
-            summary: '用于展示后台、面板、分区模块和操作流。',
-            highlights: ['适合后台', '适合组件页', '适合控制台'],
-            cover: { label: 'Control', icon: 'fa-sliders', accent: '#8dcfff', accentSoft: '#ffe0f0' }
-        },
-        {
-            id: 'android-camera-capture',
-            title: '拍摄采集',
-            kind: 'Image',
-            category: 'android',
-            contentType: 'image',
-            detailPath: 'pages/project-detail.html?id=android-camera-capture',
-            summary: '用于展示拍摄、扫码、识别、采集类界面。',
-            highlights: ['适合采集页', '适合扫码页', '适合拍摄页'],
-            cover: { label: 'Capture', icon: 'fa-camera-retro', accent: '#78c0ff', accentSoft: '#ffd8e9' }
-        },
-        {
-            id: 'embedded-module-scene',
-            title: '模块场景',
-            kind: 'Video',
-            category: 'embedded',
-            contentType: 'video',
-            detailPath: 'pages/project-detail.html?id=embedded-module-scene',
-            summary: '用于展示模块组合、设备场景和功能联动。',
-            highlights: ['适合模块联动', '适合功能演示', '适合设备场景'],
-            cover: { label: 'Module', icon: 'fa-cube', accent: '#89c6ff', accentSoft: '#ffdae8' }
-        },
-        {
-            id: 'android-navigation-explore',
-            title: '导航探索',
-            kind: 'Image',
-            category: 'android',
-            contentType: 'image',
-            detailPath: 'pages/project-detail.html?id=android-navigation-explore',
-            summary: '用于展示导航、路径、定位和探索型页面。',
-            highlights: ['适合导航页', '适合路径页', '适合探索页'],
-            cover: { label: 'Explore', icon: 'fa-compass', accent: '#8ed1ff', accentSoft: '#ffddeb' }
-        },
-        {
-            id: 'embedded-motion-sequence',
-            title: '动作序列',
-            kind: 'Video',
-            category: 'embedded',
-            contentType: 'video',
-            detailPath: 'pages/project-detail.html?id=embedded-motion-sequence',
-            summary: '用于展示设备动作、时序过程和录屏流程。',
-            highlights: ['适合时序演示', '适合动作录屏', '适合流程视频'],
-            cover: { label: 'Motion', icon: 'fa-play-circle', accent: '#77bbff', accentSoft: '#ffd2e5' }
-        },
-        {
-            id: 'android-signal-system',
-            title: '信号系统',
-            kind: 'Image',
-            category: 'android',
-            contentType: 'image',
-            detailPath: 'pages/project-detail.html?id=android-signal-system',
-            summary: '用于展示连接、通信、状态监控等界面。',
-            highlights: ['适合连接页', '适合状态监控', '适合信号展示'],
-            cover: { label: 'Signal', icon: 'fa-wifi', accent: '#87cbff', accentSoft: '#ffdeee' }
-        },
-        {
-            id: 'frontend-grid-system',
-            title: '栅格系统',
-            kind: 'Gallery',
-            category: 'frontend',
-            contentType: 'gallery',
-            detailPath: 'pages/project-detail.html?id=frontend-grid-system',
-            summary: '用于展示栅格布局、多栏排布和组件矩阵。',
-            highlights: ['适合栅格布局', '适合多栏页面', '适合组件矩阵'],
-            cover: { label: 'Grid', icon: 'fa-th-large', accent: '#84c7ff', accentSoft: '#ffd8ec' }
-        },
-        {
-            id: 'frontend-window-frame',
-            title: '窗口框架',
-            kind: 'Gallery',
-            category: 'frontend',
-            contentType: 'gallery',
-            detailPath: 'pages/project-detail.html?id=frontend-window-frame',
-            summary: '用于展示窗口式交互、页面框架和模块拆分。',
-            highlights: ['适合窗口交互', '适合框架拆分', '适合多版本设计'],
-            cover: { label: 'Frame', icon: 'fa-desktop', accent: '#90d2ff', accentSoft: '#ffe1f1' }
-        },
-        {
-            id: 'embedded-storage-core',
-            title: '存储核心',
-            kind: 'Video',
-            category: 'embedded',
-            contentType: 'video',
-            detailPath: 'pages/project-detail.html?id=embedded-storage-core',
-            summary: '用于展示存储、底层核心流程和设备视频资料。',
-            highlights: ['适合核心流程', '适合底层演示', '适合视频资料'],
-            cover: { label: 'Storage', icon: 'fa-hdd-o', accent: '#73b6ff', accentSoft: '#ffd1e6' }
-        }
-    ];
+    // 默认作品与 data/projects.json 同源：直接派生自内嵌的 GeneratedSiteData 快照，
+    // 避免两份数据漂移；远程模式下 loadProjectCatalog 会再用 projects.json 覆盖。
+    const defaultProjects = Array.isArray(window.GeneratedSiteData?.projects?.items)
+        ? window.GeneratedSiteData.projects.items.map((item) => ({ ...item }))
+        : [];
 
     const defaultHomeCover = {
-        name: 'Stage UI',
-        icon: 'fa-magic',
-        accent: '#7cc8ff',
-        accentSoft: '#ffd5e7',
-        orbit: ['fa-code', 'fa-mobile', 'fa-play-circle', 'fa-diamond']
+        name: 'P · R · T',
+        icon: 'fa-sitemap',
+        accent: '#31e0c6',
+        accentSoft: '#d8f6ff',
+        orbit: ['fa-camera-retro', 'fa-video-camera', 'fa-desktop', 'fa-gamepad']
     };
     let projects = defaultProjects.slice();
 
-    const skills = [
-        { name: 'Android', value: 90 },
-        { name: 'Web UI', value: 78 },
-        { name: 'C / C++', value: 72 },
-        { name: 'Linux', value: 66 },
-        { name: 'Python', value: 58 },
-        { name: '视觉表达', value: 84 }
-    ];
-
-    const timeline = [
-        { title: '专注移动端与界面体验', time: '现在' },
-        { title: '持续整理作品与项目页', time: '持续迭代' },
-        { title: '保持多技术栈协作能力', time: '长期方向' }
-    ];
-
-    const contacts = [
-        { label: '邮箱', value: 'pymeia@163.com', href: 'mailto:pymeia@163.com' },
-        { label: '名字', value: 'AkiyamaYusuke', href: 'https://github.com/AkiyamaYusuke/' },
-        { label: 'GitHub', value: 'github.com/AkiyamaYusuke', href: 'https://github.com/AkiyamaYusuke/' },
-        { label: '联系', value: '邮件 / GitHub', href: '#contact' }
-    ];
-
     const categoryLabels = {
         all: '全部',
-        android: 'Android',
-        frontend: '前端',
-        embedded: '嵌入式'
+        graphic: '图形',
+        streaming: '流媒体',
+        system: '系统',
+        ai: 'AI'
     };
 
     const categoryIcons = {
-        android: 'android',
-        frontend: 'desktop',
-        embedded: 'cogs'
+        graphic: 'desktop',
+        streaming: 'play-circle',
+        system: 'android',
+        ai: 'bolt'
     };
 
     const storageKeys = {
@@ -316,7 +163,14 @@
 
     async function loadCircleGalleryImages() {
         if (!window.SiteDataLoader) return;
-        const parsed = await window.SiteDataLoader.loadJson(circleGalleryConfigUrl, { items: circleGalleryImages });
+        if (location.protocol === 'file:' && generatedSiteData.circleGallery) {
+            const embeddedItems = generatedSiteData.circleGallery.items;
+            circleGalleryImages = embeddedItems && typeof embeddedItems === 'object' ? embeddedItems : {};
+            return;
+        }
+        const parsed = await window.SiteDataLoader.loadContentJson(circleGalleryConfigUrl, {
+            items: generatedSiteData.circleGallery?.items || circleGalleryImages
+        });
         circleGalleryImages = parsed?.items && typeof parsed.items === 'object' ? parsed.items : {};
     }
 
@@ -326,7 +180,7 @@
             assetPathConfig = window.SiteDataLoader.normalizeAssetConfig(generatedSiteData.assets);
             return;
         }
-        const parsed = await window.SiteDataLoader.loadJson(assetConfigUrl, generatedSiteData.assets || assetPathConfig);
+        const parsed = await window.SiteDataLoader.loadContentJson(assetConfigUrl, generatedSiteData.assets || assetPathConfig);
         assetPathConfig = window.SiteDataLoader.normalizeAssetConfig(parsed);
     }
 
@@ -336,11 +190,55 @@
             projects = window.SiteDataLoader.normalizeProjectCatalog(generatedSiteData.projects, defaultProjects);
             return;
         }
-        const parsed = await window.SiteDataLoader.loadJson(
+        const parsed = await window.SiteDataLoader.loadContentJson(
             projectDataUrl,
             generatedSiteData.projects || { items: defaultProjects }
         );
         projects = window.SiteDataLoader.normalizeProjectCatalog(parsed, defaultProjects);
+    }
+
+    // 站点文案：远程 http(s) 直接抓 data/site-copy.json；file:// 用 sync 脚本
+    // 打进 GeneratedSiteData 的 siteCopy 快照。载入后填内容数组并批量落 DOM。
+    let siteCopy = {};
+
+    function readPath(root, dottedPath) {
+        return String(dottedPath)
+            .split('.')
+            .reduce((node, key) => (node == null ? node : node[key]), root);
+    }
+
+    function applySiteCopy(copy) {
+        if (!copy || typeof copy !== 'object') return;
+
+        document.querySelectorAll('[data-copy]').forEach((node) => {
+            const value = readPath(copy, node.getAttribute('data-copy'));
+            if (value == null) return;
+            node.textContent = String(value);
+            if (node.tagName === 'TITLE') {
+                document.title = String(value);
+            }
+        });
+
+        document.querySelectorAll('[data-copy-attr]').forEach((node) => {
+            const attrName = node.getAttribute('data-copy-target') || 'content';
+            const value = readPath(copy, node.getAttribute('data-copy-attr'));
+            if (value == null) return;
+            node.setAttribute(attrName, String(value));
+        });
+    }
+
+    async function loadSiteCopy() {
+        let parsed = generatedSiteData.siteCopy;
+        if (window.SiteDataLoader && location.protocol !== 'file:') {
+            parsed = await window.SiteDataLoader.loadContentJson(siteCopyUrl, parsed || {});
+        }
+        siteCopy = parsed && typeof parsed === 'object' ? parsed : {};
+        metrics = Array.isArray(siteCopy.metrics) ? siteCopy.metrics : [];
+        stats = Array.isArray(siteCopy.sections?.tech?.cards) ? siteCopy.sections.tech.cards : [];
+        skills = Array.isArray(siteCopy.sections?.about?.skills) ? siteCopy.sections.about.skills : [];
+        timeline = Array.isArray(siteCopy.sections?.about?.timeline) ? siteCopy.sections.about.timeline : [];
+        contacts = Array.isArray(siteCopy.sections?.contact?.channels) ? siteCopy.sections.contact.channels : [];
+        applySiteCopy(siteCopy);
     }
 
     async function resolveAssetPaths() {
@@ -429,7 +327,7 @@
         const actualTheme = resolveTheme(preference);
         document.documentElement.dataset.theme = actualTheme;
         if (metaThemeColor) {
-            metaThemeColor.setAttribute('content', actualTheme === 'dark' ? '#09111d' : '#eff4fb');
+            metaThemeColor.setAttribute('content', actualTheme === 'dark' ? '#070d16' : '#e9f1fb');
         }
         if (persist) {
             localStorage.setItem(storageKeys.theme, preference);
@@ -511,7 +409,7 @@
         );
         const cover = item.cover || {};
         const accent = cover.accent || '#7dbbff';
-        const accentSoft = cover.accentSoft || '#ffd7ea';
+        const accentSoft = cover.accentSoft || '#dff3ff';
         const icon = cover.icon || `fa-${categoryIcons[item.category]}`;
         const label = cover.label || categoryLabels[item.category];
 
@@ -549,7 +447,7 @@
                 <div class="project-thumb__core">
                     <i class="fa ${icon}"></i>
                 </div>
-                <span class="project-thumb__mini project-thumb__mini-a"><i class="fa fa-circle-thin"></i></span>
+                <span class="project-thumb__mini project-thumb__mini-a"><i class="fa fa-circle-o"></i></span>
                 <span class="project-thumb__mini project-thumb__mini-b"><i class="fa ${icon}"></i></span>
                 <span class="project-thumb__mini project-thumb__mini-c">+</span>
             </div>
@@ -575,7 +473,7 @@
             getCenterProfile: () => ({
                 name: (profileName?.textContent || brandName?.textContent || githubUsername).trim(),
                 avatar: profileAvatar?.getAttribute('src') || brandAvatar?.getAttribute('src') || '',
-                subtitle: '精选作品'
+                subtitle: '感知 · 渲染 · 传输'
             }),
             onAfterRender: () => {
                 bindTiltInteractions();
@@ -861,6 +759,7 @@
         await loadAssetConfig();
         await loadDefaultSettingsConfig();
         await loadCircleGalleryImages();
+        await loadSiteCopy();
         await resolveAssetPaths();
 
         renderMetrics();

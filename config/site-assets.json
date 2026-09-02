@@ -1,35 +1,23 @@
 {
   "homeCover": "img/home.jpg",
   "projectCoverImages": {
-    "android-mobile-ui": "",
-    "frontend-layout-flow": "",
-    "embedded-device-motion": "",
-    "frontend-control-panel": "",
-    "android-camera-capture": "",
-    "embedded-module-scene": "",
-    "android-navigation-explore": "",
-    "embedded-motion-sequence": "",
-    "android-signal-system": "",
-    "frontend-grid-system": "",
-    "frontend-window-frame": "",
-    "embedded-storage-core": ""
+    "perception-capture": "img/portfolio/capture.svg",
+    "encode-stream": "img/portfolio/encode.svg",
+    "transport-network": "img/portfolio/transport.svg",
+    "render-display": "img/portfolio/render.svg",
+    "control-return": "img/portfolio/control.svg",
+    "edge-ai": "img/portfolio/ai.svg"
   },
   "detailImages": {
-    "android-mobile-ui": "",
-    "android-camera-capture": "",
-    "android-navigation-explore": "",
-    "android-signal-system": ""
+    "perception-capture": "../img/portfolio/capture.svg",
+    "encode-stream": "../img/portfolio/encode.svg",
+    "transport-network": "../img/portfolio/transport.svg",
+    "render-display": "../img/portfolio/render.svg",
+    "control-return": "../img/portfolio/control.svg",
+    "edge-ai": "../img/portfolio/ai.svg"
   },
   "detailGalleries": {
-    "frontend-layout-flow": [],
-    "frontend-control-panel": [],
-    "frontend-grid-system": [],
-    "frontend-window-frame": []
   },
   "detailVideos": {
-    "embedded-device-motion": "",
-    "embedded-module-scene": "",
-    "embedded-motion-sequence": "",
-    "embedded-storage-core": ""
   }
 }

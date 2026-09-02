@@ -114,10 +114,10 @@
                     <div class="project-thumb__glow"></div>
                     <div class="project-thumb__badge">${data.label || item.title}</div>
                     <div class="project-thumb__core">
-                        <i class="fa ${data.icon || 'fa-file-image-o'}"></i>
+                        <i class="fa ${data.icon || 'fa-picture-o'}"></i>
                     </div>
-                    <span class="project-thumb__mini project-thumb__mini-a"><i class="fa fa-circle-thin"></i></span>
-                    <span class="project-thumb__mini project-thumb__mini-b"><i class="fa ${data.icon || 'fa-file-image-o'}"></i></span>
+                    <span class="project-thumb__mini project-thumb__mini-a"><i class="fa fa-circle-o"></i></span>
+                    <span class="project-thumb__mini project-thumb__mini-b"><i class="fa ${data.icon || 'fa-picture-o'}"></i></span>
                     <span class="project-thumb__mini project-thumb__mini-c">+</span>
                 </div>
             `;
@@ -125,16 +125,26 @@
 
         renderCircle(list) {
             const centerProfile = this.getCenterProfile();
+            const count = list.length;
+            // 对称环形：N 张卡等角度分布整圈（含首尾间隔），卡片绕圆心放射排列、无缺口
+            const arcCenter = 0.5;
+            const arcSize = count > 1 ? (count - 1) / count : 0.9;
             this.gridHost.innerHTML = `
                 <div class="source-gallery-shell reveal">
-                    <section class="source-gallery-wrapper" style="--cards:${list.length};">
+                    <section class="source-gallery-wrapper" style="--cards:${count}; --arc-center:${arcCenter}; --arc-size:${arcSize};">
                         ${list.map((item, index) => {
                             const data = this.resolveCoverData(item);
-                            const imagePath = data.circleImagePath || data.imagePath || data.fallbackPath || '';
+                            const imagePath = data.imagePath || data.circleImagePath || data.fallbackPath || '';
+                            const fallbackPath = data.fallbackPath || imagePath;
+                            const hasFallback = Boolean(fallbackPath) && fallbackPath !== imagePath;
+                            const fallbackAttr = hasFallback ? ` data-fallback-src="${fallbackPath}"` : '';
+                            const onError = hasFallback
+                                ? ' onerror="if(this.dataset.fallbackSrc&&this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;this.removeAttribute(\'data-fallback-src\');}"'
+                                : '';
                             return `
-                                <div class="source-gallery-item" style="--i:${index + 1}; --bg-img:url('${imagePath}')">
+                                <div class="source-gallery-item" style="--i:${index + 1}; --bg-img:url('${fallbackPath || imagePath}')">
                                     <a href="${this.getHref(item)}" aria-label="打开 ${item.title}">
-                                        <img src="${imagePath}" alt="${item.title}">
+                                        <img src="${imagePath}" alt="${item.title}"${fallbackAttr}${onError}>
                                     </a>
                                 </div>
                             `;

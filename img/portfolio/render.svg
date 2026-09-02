@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="85%">
+      <stop offset="0%" stop-color="#0e2330"/>
+      <stop offset="55%" stop-color="#091623"/>
+      <stop offset="100%" stop-color="#04090f"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#2fd9c6" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <rect width="400" height="600" fill="url(#grid)"/>
+
+  <text x="18" y="34" font-family="ui-monospace,Consolas,monospace" font-size="11" letter-spacing="3" fill="#2fd9c6" opacity="0.9">PRT // STAGE 04</text>
+  <circle cx="382" cy="28" r="4" fill="#2fd9c6"/>
+
+  <!-- app surfaces stacked -->
+  <g transform="translate(42 186)">
+    <rect x="0" y="26" width="78" height="52" rx="7" fill="#2fd9c6" opacity="0.16"/>
+    <rect x="9" y="17" width="78" height="52" rx="7" fill="#2fd9c6" opacity="0.3"/>
+    <rect x="18" y="8" width="78" height="52" rx="7" fill="#0c2231" stroke="#2fd9c6" stroke-width="2"/>
+    <text x="57" y="38" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#bdf5ec">SURFACE</text>
+    <text x="57" y="50" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#6fccc0">HWUI / SKIA</text>
+  </g>
+
+  <!-- arrow -->
+  <path d="M128 230 h22 M150 225 l8 5 -8 5 z" fill="#2fd9c6" stroke="#2fd9c6" stroke-width="1.5"/>
+
+  <!-- composer -->
+  <g transform="translate(162 168)">
+    <rect x="0" y="0" width="120" height="126" rx="12" fill="#0c2231" stroke="#2fd9c6" stroke-width="2"/>
+    <text x="60" y="22" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="10" fill="#bdf5ec" letter-spacing="2">COMPOSER</text>
+    <rect x="14" y="32" width="92" height="20" rx="5" fill="#2fd9c6" opacity="0.5"/>
+    <rect x="14" y="56" width="92" height="20" rx="5" fill="#2fd9c6" opacity="0.32"/>
+    <rect x="14" y="80" width="92" height="20" rx="5" fill="#2fd9c6" opacity="0.2"/>
+    <path d="M14 32 h92 M14 56 h92 M14 80 h92" stroke="#0c2231" stroke-width="0"/>
+    <g fill="#e6fffb" font-family="ui-monospace,Consolas,monospace" font-size="8">
+      <text x="24" y="46">LAYER A</text>
+      <text x="24" y="70">LAYER B</text>
+      <text x="24" y="94">LAYER C</text>
+    </g>
+    <text x="60" y="120" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" letter-spacing="2" fill="#6fccc0">EGL · GLES · VK</text>
+  </g>
+
+  <!-- fence timeline -->
+  <g transform="translate(118 318)">
+    <line x1="12" y1="0" x2="12" y2="120" stroke="#2fd9c6" stroke-width="2"/>
+    <g stroke="#2fd9c6" stroke-width="1.4">
+      <line x1="12" y1="20" x2="34" y2="20"/>
+      <line x1="12" y1="48" x2="34" y2="48"/>
+      <line x1="12" y1="76" x2="34" y2="76"/>
+      <line x1="12" y1="104" x2="34" y2="104"/>
+    </g>
+    <circle cx="12" cy="20" r="2.6" fill="#e6fffb"/>
+    <text x="40" y="23" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#bdf5ec">FENCE</text>
+    <text x="40" y="51" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#6fccc0">producer</text>
+    <text x="40" y="79" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#6fccc0">consumer</text>
+  </g>
+
+  <!-- display stack -->
+  <g transform="translate(268 196)">
+    <g font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#bdf5ec">
+      <text x="0" y="0">SurfaceFlinger</text>
+      <text x="0" y="20">HWC</text>
+      <text x="0" y="40">DRM / KMS</text>
+      <text x="0" y="60">PANEL</text>
+    </g>
+    <rect x="96" y="-6" width="66" height="90" rx="8" fill="none" stroke="#2fd9c6" stroke-width="2"/>
+    <path d="M108 84 h42 M108 84 l5 -7 M108 84 l-5 -7" fill="none" stroke="#2fd9c6" stroke-width="1.6" opacity="0.7"/>
+    <rect x="106" y="-16" width="46" height="6" rx="3" fill="#2fd9c6" opacity="0.9"/>
+    <line x1="40" y1="30" x2="92" y2="30" stroke="#2fd9c6" stroke-width="1.3" stroke-dasharray="3 4" opacity="0.6"/>
+  </g>
+
+  <line x1="18" y1="520" x2="382" y2="520" stroke="#2fd9c6" stroke-opacity="0.35"/>
+  <text x="22" y="546" font-family="ui-monospace,Consolas,monospace" font-size="21" font-weight="700" fill="#e6fffb" letter-spacing="1">RENDER</text>
+  <text x="22" y="572" font-family="ui-monospace,Consolas,monospace" font-size="11" letter-spacing="2" fill="#a7f0e6">渲染显示 · EGL/GLES · Fence · SF→HWC→DRM</text>
+</svg>

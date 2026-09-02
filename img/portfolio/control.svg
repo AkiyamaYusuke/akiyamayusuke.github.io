@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="85%">
+      <stop offset="0%" stop-color="#2a2111"/>
+      <stop offset="55%" stop-color="#171108"/>
+      <stop offset="100%" stop-color="#0a0703"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffb454" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <rect width="400" height="600" fill="url(#grid)"/>
+
+  <text x="18" y="34" font-family="ui-monospace,Consolas,monospace" font-size="11" letter-spacing="3" fill="#ffb454" opacity="0.9">PRT // STAGE 05</text>
+  <circle cx="382" cy="28" r="4" fill="#ffb454"/>
+
+  <!-- host screen -->
+  <g transform="translate(40 196)">
+    <rect x="0" y="0" width="88" height="118" rx="10" fill="#241a0c" stroke="#ffb454" stroke-width="2"/>
+    <rect x="8" y="8" width="72" height="92" rx="4" fill="#ffb454" opacity="0.1"/>
+    <path d="M20 28 h48 M20 44 h30 M20 60 h40 M20 76 h22" stroke="#ffd9a0" stroke-opacity="0.55" stroke-width="1.6"/>
+    <line x1="34" y1="112" x2="54" y2="112" stroke="#ffb454" stroke-width="2"/>
+    <text x="44" y="132" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#ffd9a0">HOST</text>
+  </g>
+
+  <!-- command packets -->
+  <g fill="#ffd9a0" opacity="0.9">
+    <rect x="140" y="206" width="30" height="16" rx="3"/>
+    <rect x="140" y="246" width="30" height="16" rx="3" opacity="0.6"/>
+    <rect x="140" y="286" width="30" height="16" rx="3" opacity="0.35"/>
+  </g>
+
+  <!-- control bus -->
+  <g transform="translate(96 224)">
+    <path d="M46 0 v150" stroke="#ffb454" stroke-width="2"/>
+    <g stroke="#ffb454" stroke-width="1.2">
+      <line x1="46" y1="24" x2="70" y2="24"/>
+      <line x1="46" y1="62" x2="70" y2="62"/>
+      <line x1="46" y1="100" x2="70" y2="100"/>
+      <line x1="46" y1="126" x2="70" y2="126"/>
+    </g>
+    <text x="34" y="-14" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#ffd9a0">AIDL / ControlCodec</text>
+  </g>
+
+  <!-- actuator / hand side -->
+  <g transform="translate(262 200)">
+    <circle cx="0" cy="60" r="50" fill="none" stroke="#ffb454" stroke-width="2"/>
+    <path d="M-20 34 a22 22 0 0 1 0 52 M20 34 a22 22 0 0 0 0 52 M0 20 v14 M0 86 v14"
+      fill="none" stroke="#ffb454" stroke-width="2" opacity="0.7"/>
+    <path d="M-14 96 a14 14 0 0 1 28 0 Z" fill="#ffb454" opacity="0.18"/>
+    <text x="0" y="132" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#ffd9a0">REMOTE</text>
+  </g>
+
+  <!-- input event arrow back -->
+  <g stroke="#ffd9a0" stroke-width="1.4" fill="none">
+    <path d="M262 322 h-44 q-24 0 -24 -22 v-34" stroke-dasharray="3 5" opacity="0.85"/>
+    <path d="M194 256 l-8 4 v-8 z" fill="#ffd9a0"/>
+  </g>
+  <text x="196" y="366" font-family="ui-monospace,Consolas,monospace" font-size="9" letter-spacing="1" fill="#ffd9a0">INPUT INJECT</text>
+
+  <!-- heartbeat -->
+  <g transform="translate(120 402)">
+    <path d="M0 14 h26 l8 -10 12 22 8 -12 h52" fill="none" stroke="#ffb454" stroke-width="1.8"/>
+    <circle cx="120" cy="14" r="2.4" fill="#ffb454"/>
+    <text x="0" y="44" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#ffd9a0">HEARTBEAT · 断线自动重启</text>
+  </g>
+
+  <line x1="18" y1="520" x2="382" y2="520" stroke="#ffb454" stroke-opacity="0.35"/>
+  <text x="22" y="546" font-family="ui-monospace,Consolas,monospace" font-size="21" font-weight="700" fill="#fff3e0" letter-spacing="1">CONTROL</text>
+  <text x="22" y="572" font-family="ui-monospace,Consolas,monospace" font-size="11" letter-spacing="2" fill="#ffe0ad">控制回传 · 输入注入 · 触控 · 三层内容治理</text>
+</svg>

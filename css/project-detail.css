@@ -1,10 +1,14 @@
 :root {
     color-scheme: light;
-    --page-bg: linear-gradient(180deg, #f8fbff 0%, #eef5ff 38%, #fdf5fb 100%);
-    --card-bg: rgba(255, 255, 255, 0.82);
+    --page-bg: linear-gradient(180deg, #f7fbff 0%, #edf4fd 40%, #e6f3fa 100%);
+    --card-bg: rgba(255, 255, 255, 0.84);
     --card-border: rgba(159, 185, 220, 0.28);
     --text-main: #1f2d49;
     --text-soft: #6c7a96;
+    --accent: #0ea5e9;
+    --accent-2: #0ec2c0;
+    --accent-3: #6d8dff;
+    --font-mono: "Cascadia Code", "JetBrains Mono", Consolas, "SF Mono", monospace;
     --shadow-lg: 0 30px 80px rgba(111, 136, 173, 0.18);
     --radius-xl: 34px;
 }
@@ -19,8 +23,8 @@ body {
     font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     color: var(--text-main);
     background:
-        radial-gradient(circle at 12% 16%, rgba(255, 197, 225, 0.46), transparent 24%),
-        radial-gradient(circle at 88% 22%, rgba(143, 214, 255, 0.42), transparent 25%),
+        radial-gradient(circle at 12% 16%, rgba(122, 214, 240, 0.34), transparent 24%),
+        radial-gradient(circle at 88% 22%, rgba(146, 168, 255, 0.30), transparent 25%),
         var(--page-bg);
 }
 
@@ -67,7 +71,7 @@ body {
     width: fit-content;
     padding: 9px 14px;
     border-radius: 999px;
-    background: linear-gradient(135deg, rgba(126, 190, 255, 0.22), rgba(255, 208, 230, 0.28));
+    background: linear-gradient(135deg, rgba(56, 208, 202, 0.22), rgba(126, 164, 255, 0.22));
     color: #4b5d83;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -105,11 +109,87 @@ body {
     color: #546683;
 }
 
+.detail-stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.detail-stack__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-soft);
+    white-space: nowrap;
+}
+
+.detail-stack__label i {
+    color: var(--accent-2);
+}
+
+.stack-chip {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    color: #1d5a72;
+    background: linear-gradient(180deg, rgba(120, 216, 240, 0.14), rgba(126, 164, 255, 0.12));
+    border: 1px solid rgba(104, 190, 226, 0.34);
+}
+
+.detail-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(159, 185, 220, 0.34);
+}
+
+.detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.10), rgba(14, 194, 192, 0.12));
+    border: 1px solid rgba(14, 165, 233, 0.30);
+    color: #167aa8;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.detail-link i {
+    font-size: 0.8rem;
+}
+
+.detail-link:hover {
+    border-color: rgba(14, 165, 233, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(14, 165, 233, 0.14);
+}
+
 .detail-media {
     min-height: 420px;
 }
 
-.detail-image,
+.detail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 28px;
+    border: 1px solid rgba(170, 193, 225, 0.3);
+    background: linear-gradient(180deg, rgba(16, 24, 38, 0.94), rgba(27, 40, 61, 0.96));
+}
+
 .detail-video {
     width: 100%;
     height: 100%;
@@ -145,8 +225,8 @@ body {
 
 .detail-gallery__item--ghost {
     background:
-        radial-gradient(circle at 25% 24%, rgba(255, 206, 230, 0.42), transparent 32%),
-        radial-gradient(circle at 72% 70%, rgba(132, 210, 255, 0.38), transparent 34%),
+        radial-gradient(circle at 25% 24%, rgba(56, 205, 220, 0.36), transparent 32%),
+        radial-gradient(circle at 72% 70%, rgba(126, 164, 255, 0.34), transparent 34%),
         linear-gradient(160deg, rgba(20, 30, 47, 0.96), rgba(34, 49, 75, 0.94));
 }
 
@@ -160,8 +240,8 @@ body {
     border-radius: 28px;
     border: 1px solid rgba(170, 193, 225, 0.28);
     background:
-        radial-gradient(circle at 18% 18%, rgba(255, 210, 232, 0.42), transparent 28%),
-        radial-gradient(circle at 82% 76%, rgba(142, 211, 255, 0.36), transparent 30%),
+        radial-gradient(circle at 18% 18%, rgba(56, 205, 220, 0.34), transparent 28%),
+        radial-gradient(circle at 82% 76%, rgba(126, 164, 255, 0.32), transparent 30%),
         linear-gradient(160deg, rgba(20, 30, 47, 0.96), rgba(34, 49, 75, 0.94));
 }
 

@@ -12,9 +12,10 @@
     };
 
     const categoryLabels = {
-        android: 'Android',
-        frontend: '前端',
-        embedded: '嵌入式'
+        graphic: '图形',
+        streaming: '流媒体',
+        system: '系统',
+        ai: 'AI'
     };
 
     const contentTypeLabels = {
@@ -27,6 +28,8 @@
     const pageSummary = document.getElementById('detailSummary');
     const pageBadge = document.getElementById('detailBadge');
     const pageMeta = document.getElementById('detailMeta');
+    const pageStack = document.getElementById('detailStack');
+    const pageLinks = document.getElementById('detailLinks');
     const pageMedia = document.getElementById('detailMedia');
     const pageHighlights = document.getElementById('detailHighlights');
     const pageBackLink = document.getElementById('detailBackLink');
@@ -39,9 +42,9 @@
     function createCoverFallback(project) {
         const cover = project.cover || {};
         const label = cover.label || project.title || 'Project';
-        const icon = cover.icon || 'fa-cube';
+        const icon = cover.icon || 'fa-th-large';
         const accent = cover.accent || '#7dbbff';
-        const accentSoft = cover.accentSoft || '#ffd7ea';
+        const accentSoft = cover.accentSoft || '#dff3ff';
         return `
             <div class="detail-cover detail-cover--icon" style="--cover-accent:${accent};--cover-accent-soft:${accentSoft};">
                 <div class="detail-cover__mesh"></div>
@@ -63,6 +66,33 @@
     function renderHighlights(project) {
         const highlights = Array.isArray(project.highlights) ? project.highlights : [];
         pageHighlights.innerHTML = highlights.map((item) => `<li>${item}</li>`).join('');
+    }
+
+    function renderStack(project) {
+        const stack = Array.isArray(project.stack) && project.stack.length ? project.stack : [];
+        pageStack.hidden = !stack.length;
+        if (!stack.length) {
+            pageStack.innerHTML = '';
+            return;
+        }
+        pageStack.innerHTML = `
+            <span class="detail-stack__label"><i class="fa fa-th-list"></i>技术栈</span>
+            ${stack.map((tag) => `<code class="stack-chip">${tag}</code>`).join('')}
+        `;
+    }
+
+    function renderLinks(project) {
+        const links = Array.isArray(project.links) && project.links.length ? project.links : [];
+        pageLinks.hidden = !links.length;
+        if (!links.length) {
+            pageLinks.innerHTML = '';
+            return;
+        }
+        pageLinks.innerHTML = links.map((link) => `
+            <a class="detail-link" href="${link.url}" target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-external-link"></i>${link.label}
+            </a>
+        `).join('');
     }
 
     function renderImageMedia(project, assets) {
@@ -124,12 +154,15 @@
     }
 
     function renderProject(project, assets) {
-        document.title = `${project.title} | Akiyama Yusuke`;
-        pageTitle.textContent = project.detailTitle || project.title;
+        const headline = project.detailTitle || project.title;
+        document.title = `${headline} | AkiyamaYusuke · 复合系统工程师`;
+        pageTitle.textContent = headline;
         pageSummary.textContent = project.summary || '';
         pageBadge.textContent = project.cover?.label || project.title;
         pageBackLink.href = '../index.html#portfolio';
         renderMeta(project);
+        renderStack(project);
+        renderLinks(project);
         renderHighlights(project);
 
         if (project.contentType === 'gallery') {
@@ -163,8 +196,8 @@
         const [catalogRaw, assetRaw] = useGenerated
             ? [generatedSiteData.projects, generatedSiteData.assets]
             : await Promise.all([
-                loader.loadJson(projectDataUrl, generatedSiteData.projects || fallbackCatalog),
-                loader.loadJson(assetConfigUrl, generatedSiteData.assets || fallbackAssets)
+                loader.loadContentJson(projectDataUrl, generatedSiteData.projects || fallbackCatalog),
+                loader.loadContentJson(assetConfigUrl, generatedSiteData.assets || fallbackAssets)
             ]);
 
         const projects = loader.normalizeProjectCatalog(catalogRaw, fallbackCatalog.items);
